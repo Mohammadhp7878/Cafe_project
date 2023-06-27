@@ -27,20 +27,20 @@ class UserManage(BaseUserManager):
         user.is_superadmin = True
         user.save(using=self._db)
         return user
-    
+
+
 class User(AbstractBaseUser):
     class Role(models.TextChoices):
         cashier = ('ca', 'cashier')
         customer = ('cu', 'customer')
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=200)
-    phone_number = models.BigIntegerField(max_length=11, unique=True)
+    phone_number = models.CharField(max_length=11, unique=True)
     email = models.EmailField(unique=True, blank=True)
     role = models.CharField(max_length=2, choices=Role.choices, default=Role.customer)
     is_admin = models.BooleanField(default=False)
     user_is_staff = models.BooleanField(default=False)
     user_is_superadmin = models.BooleanField(default=False)
-
 
 
 def validate_password(value):
