@@ -4,6 +4,9 @@ from django.db import models
 class Category(models.Model):
     category_name = models.CharField(max_length=50)
 
+    def __str__(self) -> str:
+        return self.category_name
+
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
@@ -16,6 +19,9 @@ class Product(models.Model):
     discount_price = models.PositiveBigIntegerField()
     is_available = models.BooleanField(default=True)
 
+    def __str__(self) -> str:
+        return self.name
+
     def discount_to_price(self):
         if self.discount > 0:
             total_price = self.price - (self.price * self.discount / 100)
@@ -23,7 +29,7 @@ class Product(models.Model):
         return 0
 
     def save(self, *args, **kwargs):
-        self.discount_price = self.discount_to_price()  # Assigning the return value to field1
+        self.discount_price = self.discount_to_price()  
         super().save(*args, **kwargs)
 
 
