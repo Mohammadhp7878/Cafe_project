@@ -3,15 +3,16 @@ from products.models import Product
 
 
 class Order(models.Model):
-    products = models.ManyToManyField(Product) # through='Product_owner'
-    number = models.IntegerField()
+    products = models.ManyToManyField(Product, through='Product_Order')
     status = models.CharField(max_length=2)
     timestamp = models.DateTimeField()
 
 
-# class Product_owner(models.Model):
-#     product = models.ForeignKey(Product)
-#     order = models.ForeignKey(Order)
+class Product_Order(models.Model):
+    product = models.ForeignKey(Product)
+    order = models.ForeignKey(Order)
+    number = models.IntegerField()
+    price = models.PositiveBigIntegerField()
 
 class table(models.Model):
     table_number = models.IntegerField()
