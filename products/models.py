@@ -13,8 +13,8 @@ class Product(models.Model):
     discount = models.PositiveSmallIntegerField()
     serving_time = models.DurationField()
     estimated_cooking_time = models.DurationField()
-    discount_price = models.PositiveBigIntegerField()
     is_available = models.BooleanField(default=True)
+    # discount_price = models.PositiveBigIntegerField()
 
     def discount_to_price(self):
         if self.discount > 0:
@@ -22,9 +22,9 @@ class Product(models.Model):
             return float(total_price)
         return 0
 
-    def save(self, *args, **kwargs):
-        self.discount_price = self.discount_to_price()  # Assigning the return value to field1
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.discount_price = self.discount_to_price()  
+    #     super().save(*args, **kwargs)
 
 
 
