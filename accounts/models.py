@@ -40,7 +40,7 @@ class User(AbstractBaseUser):
     role = models.CharField(max_length=2, choices=Role.choices, default=Role.customer)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-    user_is_superadmin = models.BooleanField(default=False)
+    is_superadmin= models.BooleanField(default=False)
 
 
 def validate_password(value):
