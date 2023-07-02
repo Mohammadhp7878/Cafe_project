@@ -18,7 +18,11 @@
                                     <span><i class="fa-solid fa-cart-shopping"></i></span>
                                 </p>
                             {% else %}
-                                <p>{{ product.price }}$ <span><i type='submit' class="fa-solid fa-cart-shopping" onclick=""></i></span></p>
+                                {% if product.is_available %}
+                                    <p>{{ product.price }}$ <span><i type='submit' class="fa-solid fa-cart-shopping" onclick=""></i></span></p>
+                                {% else %}
+                                    <p>{{ product.price }}$ <span><i>unavailable</i></span></p>
+                                {% endif %}
                             {% endif %}
                         </div>
                     </div>
