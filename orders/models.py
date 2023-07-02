@@ -21,6 +21,6 @@ class table(BaseModel):
 
 
 class Receipt(BaseModel):
-    orders = models.ForeignKey('Order', on_delete=models.PROTECT)
+    orders = models.ForeignKey(Order, on_delete=models.PROTECT)
     total_price = models.DecimalField(decimal_places=2, max_digits=8)
     final_price = models.DecimalField(decimal_places=2, max_digits=8)

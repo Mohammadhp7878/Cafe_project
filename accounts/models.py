@@ -50,12 +50,7 @@ class User(AbstractBaseUser):
         Waiter = ("wa", "waiter")
         customer = ("cu", "customer")
 
-    first_name = models.CharField(max_length=150)
-    last_name = models.CharField(max_length=200)
     phone_number = models.CharField(max_length=11, unique=True)
     email = models.EmailField(unique=True, blank=True)
     role = models.CharField(max_length=2, choices=Role.choices, default=Role.customer)
     password = models.CharField(max_length=20, validators=[validate_password])
-    is_admin = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
-    is_superadmin = models.BooleanField(default=False)
