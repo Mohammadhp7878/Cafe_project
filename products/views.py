@@ -7,7 +7,7 @@ from .models import Product
 class ProductView(View):
     def get(self, request):
         products = Product.objects.all()
-        return render(request, 'base.html', {'products': products})
+        return render(request, 'product/new_product.html', {'products': products})
     
     def post(self, request):
         product_id = request.POST.get('id')
