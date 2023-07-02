@@ -1,5 +1,4 @@
 from django.db import models
-from core.models import BaseModel
 from django.core.exceptions import ValidationError
 import re
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
