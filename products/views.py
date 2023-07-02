@@ -21,4 +21,7 @@ class CategoryView(View):
     def get(self, request):
         categories = Category.objects.all()
         return render(request, 'product/new_product.html', {'categories': categories})
+    
+    def post(self, request):
+        pass
 
