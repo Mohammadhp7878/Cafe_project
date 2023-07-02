@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from .models import Product
 
 
-class HomeView(View):
+class ProductView(View):
     def get(self, request):
         products = Product.objects.all()
         return render(request, 'base.html', {'products': products})
