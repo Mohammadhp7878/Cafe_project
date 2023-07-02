@@ -1,3 +1,7 @@
 from django.db import models
+from core.models import BaseModel
 
-# Create your models here.
+class AboutUs(BaseModel):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    image_url = models.CharField(max_length=200)
