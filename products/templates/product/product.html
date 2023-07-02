@@ -4,8 +4,9 @@
     <div class="container">
         <div class="heading3">Category</div>
         <div class="heading3">
+            <a id="text" class="black-text" href="">All category</a>&nbsp &nbsp
             {% for category in categories %}
-                <span><i>{{ category }}</i></span>
+                <a id="text" class="black-text" href="">{{ category.category_name }}</a>&nbsp &nbsp
             {% endfor %}
         </div>
     </div>
@@ -24,7 +25,7 @@
                                 </p>
                             {% else %}
                                 {% if product.is_available %}
-                                    <p>{{ product.price }}$ <span><i type='submit' class="fa-solid fa-cart-shopping" onclick=""></i></span></p>
+                                    <p>{{ product.price }}$ <span><i type='submit' class="fa-solid fa-cart-shopping" onclick='hello'></i></span></p>
                                 {% else %}
                                     <p>{{ product.price }}$ <span><i>unavailable</i></span></p>
                                 {% endif %}
@@ -38,4 +39,15 @@
             {% endfor %}
         </div>
     </div>
+    <!-- <script>
+        const textElement = document.getElementById("text");
+      
+        textElement.addEventListener("mouseover", function() {
+          textElement.classList.add("black-text");
+        });
+      
+        textElement.addEventListener("mouseout", function() {
+          textElement.classList.remove("black-text");
+        });
+    </script> -->
 </section>
