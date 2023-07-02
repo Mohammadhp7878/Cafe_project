@@ -9,8 +9,8 @@ class Order(models.Model):
 
 
 class Product_Order(models.Model):
-    product = models.ForeignKey(Product)
-    order = models.ForeignKey(Order)
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    order = models.ForeignKey(Order, on_delete=models.PROTECT)
     number = models.IntegerField()
     price = models.PositiveBigIntegerField()
 
