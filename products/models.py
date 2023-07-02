@@ -1,11 +1,12 @@
 from django.db import models
+from core.models import BaseModel
 
 
-class Category(models.Model):
+class Category(BaseModel):
     category_name = models.CharField(max_length=50)
 
 
-class Product(models.Model):
+class Product(BaseModel):
     name = models.CharField(max_length=100)
     price = models.PositiveBigIntegerField()
     category = models.ForeignKey(Category, on_delete=models.PROTECT)

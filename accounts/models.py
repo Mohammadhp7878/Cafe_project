@@ -1,8 +1,8 @@
 from django.db import models
+from core.models import BaseModel
 from django.core.exceptions import ValidationError
 import re
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
-
 
 class UserManage(BaseUserManager):
     def create_user(self, first_name, last_name, phone_number, email, password=None):
@@ -59,7 +59,7 @@ def validate_birth_date(value):
         raise ValidationError('Date of birth must be after 2008.')
 
 
-class UserAnonymous(models.Model):
+class UserAnonymous(BaseModel):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone = models.PositiveIntegerField()
