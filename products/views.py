@@ -1,13 +1,14 @@
 from django.views import View
 from django.shortcuts import render
 from django.shortcuts import redirect
-from .models import Product
+from .models import Product, Category
 
 
 class ProductView(View):
     def get(self, request):
         products = Product.objects.all()
-        return render(request, 'product/new_product.html', {'products': products})
+        categories = Category.objects.all()
+        return render(request, 'product/new_product.html', {'products': products, 'categories': categories})
     
     def post(self, request):
         product_id = request.POST.get('id')
