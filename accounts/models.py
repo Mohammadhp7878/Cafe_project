@@ -48,7 +48,7 @@ class User(AbstractBaseUser):
     class Role(models.TextChoices):
         CASHIER = ("ca", "cashier")
         WAITER = ("wa", "waiter")
-        customer = ("cu", "customer")
+        CUSTOMER= ("cu", "customer")
 
     phone_number = models.CharField(max_length=11, unique=True)
     email = models.EmailField(unique=True, blank=True)
