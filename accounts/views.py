@@ -64,3 +64,14 @@ class CreateOrderView(View):
         context = {'form': form}
         return render(request, 'order_create.html', context)
 
+
+class DeleteOrderView(View):
+    def get(self, request, pk):
+        order = Order.objects.get(id=pk)
+        return render(request, 'delete.html', {'order': order})
+
+    def post(self, request, pk):
+        order = Order.objects.get(id=pk)
+        order.delete()
+        return redirect('/')
+
