@@ -15,29 +15,31 @@
     <div class="container" id="container2">
         <div class="row" style="margin-top: 30px;">
             {% for product in products %}
-                <div class="col-md-3 py-3 py-md-0">
-                    <div class="card" style="height: 400px;">
-                        <img src="{{ product.image_src }}" alt="">
-                        <div class="card-body">
-                            <h3 style="margin-top: 3px">{{ product.name }}</h3>
-                            {% if product.discount %}
-                                <p style="margin-top: 15px;">{{ product.discount_price }}$&nbsp &nbsp {{ product.discount }}% <br>
-                                    <strike >{{ product.price }}$</strike>
-                                    <span><i class="fa-solid fa-cart-shopping"></i></span>
-                                </p>
-                            {% else %}
-                                {% if product.is_available %}
-                                    <p>{{ product.price }}$ <span><i type='submit' class="fa-solid fa-cart-shopping" onclick='hello'></i></span></p>
+                
+                    <div class="col-md-3 py-3 py-md-0">
+                        <div class="card" style="height: 400px;">
+                            <img src="{{ product.image_src }}" alt="">
+                            <div class="card-body">
+                                <h3 style="margin-top: 3px">{{ product.name }}</h3>
+                                {% if product.discount %}
+                                    <p style="margin-top: 15px;">{{ product.discount_price }}$&nbsp &nbsp {{ product.discount }}% <br>
+                                        <strike >{{ product.price }}$</strike>
+                                        <span><i class="fa-solid fa-cart-shopping"></i></span>
+                                    </p>
                                 {% else %}
-                                    <p>{{ product.price }}$ <span><i>unavailable</i></span></p>
+                                    {% if product.is_available %}
+                                        <p>{{ product.price }}$ <span><i type='submit' class="fa-solid fa-cart-shopping" onclick='hello'></i></span></p>
+                                    {% else %}
+                                        <p>{{ product.price }}$ <span><i>unavailable</i></span></p>
+                                    {% endif %}
                                 {% endif %}
-                            {% endif %}
+                            </div>
                         </div>
                     </div>
-                </div>
-                {% if forloop.counter|divisibleby:4 and not forloop.last %}
-                    </div><div class="row" style="margin-top: 30px;">
-                {% endif %}
+                    {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                        </div><div class="row" style="margin-top: 30px;">
+                    {% endif %}
+                
             {% endfor %}
         </div>
     </div>  
