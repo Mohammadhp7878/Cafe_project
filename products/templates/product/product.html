@@ -4,9 +4,11 @@
     <div class="container">
         <div class="heading3">Category</div>
         <div class="heading3">
-            <a id="text" class="black-text" href="">All category</a>&nbsp &nbsp
+            <!-- <button type="submit" class="btn btn-dark" name="All category">All category</button> -->
+            <a href="{% url 'new_product' %}?category=All category" class="btn btn-dark">All category</a>
             {% for category in categories %}
-                <a id="text" class="black-text" href="">{{ category.category_name }}</a>&nbsp &nbsp
+                <!-- <button type="submit" class="btn btn-dark" name="{{ category.category_name }}">{{ category.category_name }}</button> -->
+                <a href="{% url 'new_product' %}?category={{ category.category_name }}" class="btn btn-dark" >{{ category.category_name }}</a>
             {% endfor %}
         </div>
     </div>
@@ -38,16 +40,6 @@
                 {% endif %}
             {% endfor %}
         </div>
-    </div>
-    <!-- <script>
-        const textElement = document.getElementById("text");
-      
-        textElement.addEventListener("mouseover", function() {
-          textElement.classList.add("black-text");
-        });
-      
-        textElement.addEventListener("mouseout", function() {
-          textElement.classList.remove("black-text");
-        });
-    </script> -->
+    </div>  
+
 </section>

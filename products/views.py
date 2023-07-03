@@ -8,22 +8,27 @@ class ProductView(View):
     def get(self, request):
         products = Product.objects.all()
         categories = Category.objects.all()
-        return render(request, 'product/new_product.html', {'products': products})
+        return render(request, 'product/new_product.html', {'products': products, 'categories': categories})
     
-    def post(self, request):
-        product_id = request.POST.get('id')
-        cart_value = [request.session.get('cart', 0)]
-        cart_value.append(product_id)
-        request.session['cart'] = cart_value
-        return redirect('product')
+    def post(request):
+        products = Product.objects.filter(category=request.POST)
+        return redirect(request, 'product/new_product.html', {'products': products})
+    
+
+    # def post(self, request):
+    #     product_id = request.POST.get('id')
+    #     cart_value = [request.session.get('cart', 0)]
+    #     cart_value.append(product_id)
+    #     request.session['cart'] = cart_value
+    #     return redirect('product')
 
 
-class CategoryView(View):
-    def get(self, request):
-        categories = Category.objects.filter(pk=id)
-        return render(request, 'product/new_product.html', {'categories': categories})
+# class CategoryView(View):
+#     def get(self, request):
+#         categories = Category.objects.filter(pk=id)
+#         return render(request, 'product/new_product.html', {'categories': categories})
     
-    def post(self, request):
-        category_id = request.POST.get('id')
-        return redirect('product')
+#     def post(self, request):
+#         category_id = request.POST.get('id')
+#         return redirect('product')
 
