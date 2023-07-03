@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from ..orders.models import Order
 from .forms import LoginForm
 from .models import User
+from django.contrib import messages
 
 
 class DashboardView(View):
@@ -45,6 +46,6 @@ class CashierLogin(View):
             if get_user:
                 return redirect('cashierpanel.html')
             else: 
-                return redirect('login.html')
-        return render(request, self.template)
+                return messages.error(request, 'invalid username or password')
+        return render(request, self.template, {'form': form})
 
