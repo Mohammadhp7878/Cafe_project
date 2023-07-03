@@ -15,6 +15,7 @@ class Product_Order(BaseModel):
     number = models.IntegerField()
     price = models.PositiveBigIntegerField()
 
+
 class table(BaseModel):
     table_number = models.IntegerField()
     cafe_space_position = models.CharField(max_length=250)
