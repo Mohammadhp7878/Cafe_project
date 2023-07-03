@@ -47,7 +47,7 @@ def validate_password(value):
 class User(AbstractBaseUser):
     class Role(models.TextChoices):
         cashier = ("ca", "cashier")
-        Waiter = ("wa", "waiter")
+        WAITER = ("wa", "waiter")
         customer = ("cu", "customer")
 
     phone_number = models.CharField(max_length=11, unique=True)
