@@ -1,6 +1,6 @@
 from django import forms 
 from django.contrib.auth.forms import AuthenticationForm
-from ..orders.models import Order
+from orders.models import Order
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(

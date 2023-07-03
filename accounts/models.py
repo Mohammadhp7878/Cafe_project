@@ -1,3 +1,4 @@
+from typing import Optional
 from django.db import models
 from django.core.exceptions import ValidationError
 import re
@@ -29,7 +30,6 @@ class UserManager(BaseUserManager):
         user.is_active = True
         user.is_staff = True
         user.is_superadmin = True
-        user.has_module_perms = True
         user.save(using=self._db)
         return user
 
@@ -61,7 +61,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_admin = models.BooleanField(default=False)
     is_superadmin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-    has_module_perms = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = ['password', 'first_name', 'last_name']
@@ -70,3 +69,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.phone_number
     
+    def has_perm(self, perm, obj=None) -> bool:
+        return self.is_admin
+    
+    def has_module_perms(self, app_label: str) -> bool:
+        return True

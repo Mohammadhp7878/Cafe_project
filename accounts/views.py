@@ -1,7 +1,7 @@
 from django.views import View
 from django.shortcuts import render, redirect
 from orders.models import Order
-from .forms import LoginForm
+from .forms import LoginForm, OrderForm
 from .models import User
 from django.contrib import messages
 
