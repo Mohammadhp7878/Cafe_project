@@ -2,7 +2,7 @@
 from django.views import View
 from django.shortcuts import render, redirect
 from ..orders.models import Order
-from .forms import LoginForm
+from .forms import LoginForm, OrderForm
 from .models import User
 from django.contrib import messages
 
@@ -48,4 +48,19 @@ class CashierLogin(View):
             else: 
                 return messages.error(request, 'invalid username or password')
         return render(request, self.template, {'form': form})
+
+
+class CreateOrderView(View):
+    def get(self, request):
+        form = OrderForm()
+        context = {'form': form}
+        return render(request, 'order_create.html', context)
+
+    def post(self, request):
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        context = {'form': form}
+        return render(request, 'order_create.html', context)
 
