@@ -1,6 +1,6 @@
 from django.db import models
-from products.models import Product
-from core.models import BaseModel
+from ..products.models import Product
+from ..core.models import BaseModel
 
 
 class Order(BaseModel):
@@ -14,6 +14,7 @@ class Product_Order(BaseModel):
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
     number = models.IntegerField()
     price = models.PositiveBigIntegerField()
+
 
 class table(BaseModel):
     table_number = models.IntegerField()
