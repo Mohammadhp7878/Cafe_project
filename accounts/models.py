@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 import re
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 
 
 class UserManager(BaseUserManager):
@@ -29,6 +29,7 @@ class UserManager(BaseUserManager):
         user.is_active = True
         user.is_staff = True
         user.is_superadmin = True
+        user.has_module_perms = True
         user.save(using=self._db)
         return user
 
@@ -44,7 +45,7 @@ def validate_password(value):
         raise ValidationError("Password must have at least one special character.")
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     class Role(models.TextChoices):
         CASHIER = ("ca", "cashier")
         WAITER = ("wa", "waiter")
@@ -53,13 +54,14 @@ class User(AbstractBaseUser):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=11, unique=True)
-    email = models.EmailField(unique=True, blank=True)
+    email = models.EmailField(blank=True)
     role = models.CharField(max_length=2, choices=Role.choices, default=Role.CUSTOMER)
     password = models.CharField(max_length=200, validators=[validate_password])
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_superadmin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
+    has_module_perms = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = ['password', 'first_name', 'last_name']
