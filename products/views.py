@@ -2,33 +2,19 @@ from django.views import View
 from django.shortcuts import render
 from django.shortcuts import redirect
 from .models import Product, Category
+from django.contrib.messages import constants as messages
 
 
 class ProductView(View):
-    def get(self, request):
+    def get(self, request, category_slug=None):
         products = Product.objects.all()
         categories = Category.objects.all()
+        if category_slug:
+            category = Category.objects.get(category_name=category_slug)
+            products = products.filter(category = category)
+
         return render(request, 'product/new_product.html', {'products': products, 'categories': categories})
     
-    def post(request):
-        products = Product.objects.filter(category=request.POST['id'])
-        return redirect(request, 'product/new_product.html', {'products': products})
     
 
-    # def post(self, request):
-    #     product_id = request.POST.get('id')
-    #     cart_value = [request.session.get('cart', 0)]
-    #     cart_value.append(product_id)
-    #     request.session['cart'] = cart_value
-    #     return redirect('product')
-
-
-# class CategoryView(View):
-#     def get(self, request):
-#         categories = Category.objects.filter(pk=id)
-#         return render(request, 'product/new_product.html', {'categories': categories})
-    
-#     def post(self, request):
-#         category_id = request.POST.get('id')
-#         return redirect('product')
 

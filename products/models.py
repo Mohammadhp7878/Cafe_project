@@ -1,10 +1,20 @@
 from django.db import models
 from core.models import BaseModel
+from django.urls import reverse
 
 
 class Category(models.Model):
-    category_name = models.CharField(max_length=40)
+    category_name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=200, unique=True)
 
+    class Meta:
+        ordering = ('category_name',)
+    
+    def __str__(self) -> str:
+        return self.category_name
+
+    def get_absolute_url(self):
+        return reverse('product:category_name', args=[self.slug])
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
@@ -27,7 +37,8 @@ class Product(models.Model):
         self.discount_price = self.discount_to_price()  # Assigning the return value to field1
         super().save(*args, **kwargs)
 
-
+    def __str__(self) -> str:
+        return self.name, self.price, self.category, self.is_available
 
 
 
