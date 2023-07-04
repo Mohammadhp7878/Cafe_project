@@ -22,4 +22,4 @@ class DashboardView(View):
             'cooking': cooking,
             'send_to_kitchen': send_to_kitchen,
         }
-        return render(request, 'dashboard.html', context)
+        return render(request, 'cashier.html', context)
