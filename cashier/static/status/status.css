@@ -2,21 +2,21 @@
 
 
 #orders-delivered{
-    background-color: #a3544a;
+    background-color: #F5CBA7  ;
 }
 
 #orders-pending{
-    background-color: #c76c5e;
+    background-color: #E59866;
 }
 
 #orders-cooking{
-    background-color: #a85c52;
+    background-color: #F5CBA7;
 }
 
 #orders-sending{
-    background-color: #ab5348;
+    background-color: #E59866 ;
 }
 #total-order{
-    background-color: #b7655b;
+    background-color: #E59866;
 
 }
