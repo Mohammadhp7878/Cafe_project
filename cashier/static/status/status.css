@@ -2,21 +2,26 @@
 
 
 #orders-delivered{
-    background-color: #F5CBA7  ;
+    background-color: #E9967A  ;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 #orders-pending{
     background-color: #E59866;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 #orders-cooking{
-    background-color: #F5CBA7;
+    background-color: #E9967A;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 #orders-sending{
     background-color: #E59866 ;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 #total-order{
     background-color: #E59866;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 
 }
