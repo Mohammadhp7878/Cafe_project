@@ -50,6 +50,7 @@ class User(AbstractBaseUser):
         CASHIER = ("ca", "cashier")
         WAITER = ("wa", "waiter")
         CUSTOMER = ("cu", "customer")
+        ADMIN = ("ad", "admin")
 
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -61,6 +62,11 @@ class User(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     is_superadmin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        if self.is_superadmin:
+            self.role = User.Role.ADMIN
+        super(User, self).save(*args, **kwargs)
 
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = ['password', 'first_name', 'last_name']
