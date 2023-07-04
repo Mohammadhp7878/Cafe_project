@@ -1,8 +1,8 @@
 from django.views import View
 from django.shortcuts import render, redirect
-from .forms import LoginForm, OrderForm
-from .models import User
+from .forms import LoginForm
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 
 
 class CashierLogin(View):
@@ -18,9 +18,10 @@ class CashierLogin(View):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            get_user = User.objects.get(username=username, password=password)
+            get_user = authenticate(request, phone_number=username, password=password)
             if get_user:
-                return redirect('cashierpanel.html')
+                login(request, get_user)
+                return redirect('dashboard')
             else: 
                 return messages.error(request, 'invalid username or password')
         return render(request, self.template, {'form': form})
