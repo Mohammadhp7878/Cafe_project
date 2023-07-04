@@ -1,7 +1,8 @@
+from typing import Optional
 from django.db import models
 from django.core.exceptions import ValidationError
 import re
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 
 
 class UserManager(BaseUserManager):
@@ -53,7 +54,7 @@ class User(AbstractBaseUser):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=11, unique=True)
-    email = models.EmailField(unique=True, blank=True)
+    email = models.EmailField(blank=True)
     role = models.CharField(max_length=2, choices=Role.choices, default=Role.CUSTOMER)
     password = models.CharField(max_length=200, validators=[validate_password])
     is_active = models.BooleanField(default=True)
@@ -68,3 +69,8 @@ class User(AbstractBaseUser):
     def __str__(self):
         return self.phone_number
     
+    def has_perm(self, perm, obj=None) -> bool:
+        return self.is_admin
+    
+    def has_module_perms(self, app_label: str) -> bool:
+        return True

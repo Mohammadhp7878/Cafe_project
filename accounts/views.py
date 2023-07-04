@@ -1,4 +1,3 @@
-
 from django.views import View
 from django.shortcuts import render, redirect
 from orders.models import Order
