@@ -20,17 +20,18 @@
     <link  href="{% static 'footer/footer.css' %}" rel="stylesheet">
     <link  href="{% static 'navbar/navbar.css' %}" rel="stylesheet">
     <link  href="{% static 'base/base.css' %}" rel="stylesheet">
-    <link  href="{% static 'product/product.css' %}" rel="stylesheet">
+<!--    <link  href="{% static 'product/product.css' %}" rel="stylesheet">-->
 </head>
 <body>
     <div class="all-content">
         <!-- Include navbar.html -->
-        {% include 'inc/navbar.html' %}
-
+        {% include 'home/inc/navbar.html' %}
+<!--        {% include 'product/product.html' %}-->
+        {% include 'inc/dashboard.html' %}
         {% block content %}{% endblock %}
         <!-- Include footer.html -->
-        {% include 'inc/footer.html' %}
-        {% include 'inc/arrow.html' %}
+        {% include 'home/inc/footer.html' %}
+        {% include 'home/inc/arrow.html' %}
     </div>
 </body>
 
