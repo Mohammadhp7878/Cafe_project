@@ -1,5 +1,5 @@
 from django.views import View
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import LoginForm, OrderForm
 from .models import User
 from django.contrib import messages
@@ -25,29 +25,4 @@ class CashierLogin(View):
                 return messages.error(request, 'invalid username or password')
         return render(request, self.template, {'form': form})
 
-
-class CreateOrderView(View):
-    def get(self, request):
-        form = OrderForm()
-        context = {'form': form}
-        return render(request, 'order_create.html', context)
-
-    def post(self, request):
-        form = OrderForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/')
-        context = {'form': form}
-        return render(request, 'order_create.html', context)
-
-
-class DeleteOrderView(View):
-    def get(self, request, pk):
-        order = Order.objects.get(id=pk)
-        return render(request, 'delete.html', {'order': order})
-
-    def post(self, request, pk):
-        order = Order.objects.get(id=pk)
-        order.delete()
-        return redirect('/')
 
