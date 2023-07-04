@@ -5,10 +5,10 @@
         <div class="heading3">Category</div>
         <div class="heading3">
             <!-- <button type="submit" class="btn btn-dark" name="All category">All category</button> -->
-            <a href="{% url 'new_product' %}?category=All category" class="btn btn-dark">All category</a>
+            <a href="{% url 'new_product' %}?category=All category" class="btn btn-white">All category</a>
             {% for category in categories %}
                 <!-- <button type="submit" class="btn btn-dark" name="{{ category.category_name }}">{{ category.category_name }}</button> -->
-                <a href="{% url 'new_product' %}?category={{ category.category_name }}" class="btn btn-dark" >{{ category.category_name }}</a>
+                <a href="{% url 'new_product' %}?category={{ category.category_name }}" class="btn btn-white" >{{ category.category_name }}</a>
             {% endfor %}
         </div>
     </div>

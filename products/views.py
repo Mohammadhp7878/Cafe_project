@@ -11,7 +11,7 @@ class ProductView(View):
         return render(request, 'product/new_product.html', {'products': products, 'categories': categories})
     
     def post(request):
-        products = Product.objects.filter(category=request.POST)
+        products = Product.objects.filter(category=request.POST['id'])
         return redirect(request, 'product/new_product.html', {'products': products})
     
 
