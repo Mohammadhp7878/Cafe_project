@@ -10,7 +10,7 @@ class ProductView(View):
         products = Product.objects.all()
         categories = Category.objects.all()
         if category_slug:
-            category = Category.objects.get(category_name=category_slug)
+            category = Category.objects.get(slug=category_slug)
             products = products.filter(category = category)
 
         return render(request, 'product/new_product.html', {'products': products, 'categories': categories})

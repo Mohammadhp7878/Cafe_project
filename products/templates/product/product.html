@@ -6,7 +6,7 @@
         <div class="heading3">
             
             {% for category in categories %}
-                <a href="category get_absolute_url" class="btn btn-dark">{{ category.category_name }}</a>
+                <a href="{{ category.get_absolute_url }}" class="btn btn-dark">{{ category.category_name }}</a>
             {% endfor %}
             
         </div>

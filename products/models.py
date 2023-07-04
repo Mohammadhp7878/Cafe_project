@@ -1,20 +1,24 @@
 from django.db import models
 from core.models import BaseModel
 from django.urls import reverse
+from django.utils.text import slugify
 
 
 class Category(models.Model):
-    category_name = models.CharField(max_length=50)
+    category_name = models.CharField(max_length=60)
     slug = models.SlugField(max_length=200, unique=True)
 
-    class Meta:
-        ordering = ('category_name',)
+    def save(self, *args, **kwargs):
+        # Generate the slug from the title
+        self.slug = slugify(self.category_name)
+        super().save(*args, **kwargs)    
     
     def __str__(self) -> str:
         return self.category_name
 
     def get_absolute_url(self):
-        return reverse('product:category_name', args=[self.slug])
+        return reverse('category_filter', args=[self.slug,])
+
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
@@ -37,8 +41,8 @@ class Product(models.Model):
         self.discount_price = self.discount_to_price()  # Assigning the return value to field1
         super().save(*args, **kwargs)
 
-    def __str__(self) -> str:
-        return self.name, self.price, self.category, self.is_available
+    def __str__(self):
+        return self.name
 
 
 
