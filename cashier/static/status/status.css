@@ -1,0 +1,20 @@
+
+#total_order{
+    background-color: #b36a60;
+}
+
+#orders-delivered{
+    background-color: #a3544a;
+}
+
+#orders-pending{
+    background-color: #c76c5e;
+}
+
+#orders-cooking{
+    background-color: #a85c52;
+}
+
+#orders-sending{
+    background-color: #ab5348;
+}
