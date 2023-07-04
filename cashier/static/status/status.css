@@ -1,7 +1,5 @@
 
-#total_order{
-    background-color: #b36a60;
-}
+
 
 #orders-delivered{
     background-color: #a3544a;
@@ -17,4 +15,8 @@
 
 #orders-sending{
     background-color: #ab5348;
+}
+#total-order{
+    background-color: #b7655b;
+
 }
