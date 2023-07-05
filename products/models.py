@@ -31,6 +31,9 @@ class Product(models.Model):
     discount_price = models.PositiveBigIntegerField()
     is_available = models.BooleanField(default=True)
 
+    def get_absolute_url(self):
+        return reverse('product_name', args=[self.name,])
+    
     def discount_to_price(self):
         if self.discount > 0:
             total_price = self.price - (self.price * self.discount / 100)
@@ -43,6 +46,3 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-
-
-
