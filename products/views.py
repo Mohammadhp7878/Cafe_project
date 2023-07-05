@@ -1,6 +1,5 @@
 from django.views import View
 from django.shortcuts import render
-from django.shortcuts import redirect
 from .models import Product, Category
 from django.contrib.messages import constants as messages
 
@@ -12,10 +11,10 @@ class ProductView(View):
         if category_slug:
             category = Category.objects.get(slug=category_slug)
             products = products.filter(category = category)
-
         return render(request, 'product/new_product.html', {'products': products, 'categories': categories})
-    
-    
 
 
-
+class SessionView(View):
+    def get(self, request, product_name=None):
+        if product_name:
+            print('product_name')

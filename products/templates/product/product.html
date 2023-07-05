@@ -23,11 +23,12 @@
                                 {% if product.discount %}
                                     <p style="margin-top: 15px;">{{ product.discount_to_price }}$&nbsp &nbsp {{ product.discount }}% <br>
                                         <strike >{{ product.price }}$</strike>
-                                        <span><i class="fa-solid fa-cart-shopping"></i></span>
+                                        <span><a  class="fa-solid fa-cart-shopping"></a></span>
                                     </p>
                                 {% else %}
                                     {% if product.is_available %}
-                                        <p>{{ product.price }}$ <span><i type='submit' class="fa-solid fa-cart-shopping" onclick='hello'></i></span></p>
+                                    
+                                        <p>{{ product.price }}$ <span><a class="fa-solid fa-cart-shopping"></a></span></p>
                                     {% else %}
                                         <p>{{ product.price }}$ <span><i>unavailable</i></span></p>
                                     {% endif %}
