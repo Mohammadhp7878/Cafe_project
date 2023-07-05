@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'orders',
     'cafe',
     'cashier',
+    'home',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +62,7 @@ ROOT_URLCONF = 'cafe.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'home/templates'],
+        'DIRS': [BASE_DIR / '/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
