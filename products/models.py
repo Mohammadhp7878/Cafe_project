@@ -38,7 +38,7 @@ class Product(models.Model):
         return 0
 
     def save(self, *args, **kwargs):
-        self.discount_price = self.discount_to_price()  # Assigning the return value to field1
+        self.discount_price = self.discount_to_price() 
         super().save(*args, **kwargs)
 
     def __str__(self):
