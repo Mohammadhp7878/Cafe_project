@@ -18,4 +18,3 @@ class SessionView(View):
     def get(self, request, product_name=None):
         if product_name:
             print('product_name')
-    

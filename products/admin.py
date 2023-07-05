@@ -4,6 +4,7 @@ from .models import Product,Category
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['category_name',]
+    exclude = ['slug']
 
 admin.site.register(Product)
 admin.site.register(Category, CategoryAdmin)

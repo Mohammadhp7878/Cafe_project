@@ -4,9 +4,17 @@ from core.models import BaseModel
 
 
 class Order(BaseModel):
+    class OrderStatus(models.TextChoices):
+        Delivered = ('d', 'delivered')
+        Pending = ('p', 'Pending')
+        Cooking = ('c', 'cooking')
+        Sending = ('s', 'sending')
     products = models.ManyToManyField(Product, through='Product_Order')
-    status = models.CharField(max_length=2)
+    status = models.CharField(max_length=1, choices=OrderStatus.choices, default=OrderStatus.Pending)
     timestamp = models.DateTimeField()
+
+    def __str__(self) -> str:
+        return str(self.id)
 
 
 class Product_Order(BaseModel):
@@ -14,6 +22,7 @@ class Product_Order(BaseModel):
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
     number = models.IntegerField()
     price = models.PositiveBigIntegerField()
+
 
 class table(BaseModel):
     table_number = models.IntegerField()
