@@ -52,5 +52,5 @@ class User(AbstractBaseUser):
 
     phone_number = models.CharField(max_length=11, unique=True)
     email = models.EmailField(unique=True, blank=True)
-    role = models.CharField(max_length=2, choices=Role.choices, default=Role.customer)
+    role = models.CharField(max_length=2, choices=Role.choices, default=Role.CUSTOMER)
     password = models.CharField(max_length=20, validators=[validate_password])

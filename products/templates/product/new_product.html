@@ -19,11 +19,6 @@
     <!-- fonts links -->
     <link  href="{% static 'footer/footer.css' %}" rel="stylesheet">
     <link  href="{% static 'navbar/navbar.css' %}" rel="stylesheet">
-    <link  href="{% static 'home/slider.css' %}" rel="stylesheet">
-    <link  href="{% static 'about/about.css' %}" rel="stylesheet">
-    <link  href="{% static 'contact/contact.css' %}" rel="stylesheet">
-    <link  href="{% static 'arrow/arrow.css' %}" rel="stylesheet">
-    <link  href="{% static 'gallery/gallery.css' %}" rel="stylesheet">
     <link  href="{% static 'base/base.css' %}" rel="stylesheet">
     <link  href="{% static 'product/product.css' %}" rel="stylesheet">
 </head>
@@ -31,13 +26,8 @@
     <div class="all-content">
         <!-- Include navbar.html -->
         {% include 'inc/navbar.html' %}
-        <!-- Content of child pages will go here -->
-        {% include 'inc/slider.html' %}
-        {% include 'inc/about.html' %}
-        <!-- {% include 'product/product.html' %} -->
+        {% include 'product/product.html' %}
         {% block content %}{% endblock %}
-        {% include 'inc/gallery.html' %}
-        {% include 'inc/contact.html' %}
         <!-- Include footer.html -->
         {% include 'inc/footer.html' %}
         {% include 'inc/arrow.html' %}
