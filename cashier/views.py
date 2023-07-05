@@ -58,4 +58,8 @@ class DeleteOrderView(View):
         order = Order.objects.get(id=pk)
         order.delete()
         return redirect("/")
+    
+
+class TotalOrder(View):
+    ...
 
