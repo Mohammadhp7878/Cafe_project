@@ -22,6 +22,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('products.urls')),
+    path('', include('accounts.urls')),
+    path('', include('cashier.urls')),
+    path('', include('products.urls'), name='product'),
+    path('', include('home.urls'), name='home'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

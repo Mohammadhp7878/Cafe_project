@@ -1,0 +1,32 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <table class="table table-sm">
+
+        <tr>
+            <th>Order</th>
+            <th>Date Orderd</th>
+            <th>Status</th>
+            <th>Delete</th>
+        </tr>
+        {% for order in content %}
+        <tr>
+            <td>{{order.id}}</td>
+            <td>{{order.timestamp}}</td>
+            <td>{{order.get_status_display}}</td>
+            <td><a class="btn btn-sm btn-danger">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+
