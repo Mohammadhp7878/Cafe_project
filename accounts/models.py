@@ -1,15 +1,15 @@
+from typing import Optional
 from django.db import models
 from django.core.exceptions import ValidationError
 import re
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 
 
-class UserManage(BaseUserManager):
-    def create_user(self, first_name, last_name, phone_number, email, password=None):
+class UserManager(BaseUserManager):
+    def create_user(self, first_name, last_name, phone_number, password , email=None):
         if not phone_number:
             raise ValueError("phone number is required")
-        if not (first_name and last_name):
-            raise ValueError("first name and last name are required")
+        
         user = self.model(
             first_name=first_name,
             last_name=last_name,
@@ -21,12 +21,13 @@ class UserManage(BaseUserManager):
         return user
 
     def create_superuser(
-        self, first_name, last_name, phone_number, email, password=None
+        self, first_name, last_name, phone_number, password, email=None
     ):
         user = self.create_user(
-            first_name, last_name, phone_number, email, password=password
+            first_name, last_name, phone_number,  password, email=email
         )
         user.is_admin = True
+        user.is_active = True
         user.is_staff = True
         user.is_superadmin = True
         user.save(using=self._db)
@@ -48,9 +49,34 @@ class User(AbstractBaseUser):
     class Role(models.TextChoices):
         CASHIER = ("ca", "cashier")
         WAITER = ("wa", "waiter")
-        CUSTOMER= ("cu", "customer")
+        CUSTOMER = ("cu", "customer")
+        ADMIN = ("ad", "admin")
 
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=11, unique=True)
-    email = models.EmailField(unique=True, blank=True)
+    email = models.EmailField(blank=True)
     role = models.CharField(max_length=2, choices=Role.choices, default=Role.CUSTOMER)
-    password = models.CharField(max_length=20, validators=[validate_password])
+    password = models.CharField(max_length=200, validators=[validate_password])
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    is_superadmin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        if self.is_superadmin:
+            self.role = User.Role.ADMIN
+        super(User, self).save(*args, **kwargs)
+
+    USERNAME_FIELD = 'phone_number'
+    REQUIRED_FIELDS = ['password', 'first_name', 'last_name']
+    objects = UserManager()
+
+    def __str__(self):
+        return self.phone_number
+    
+    def has_perm(self, perm, obj=None) -> bool:
+        return self.is_admin
+    
+    def has_module_perms(self, app_label: str) -> bool:
+        return True
