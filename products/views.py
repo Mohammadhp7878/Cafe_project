@@ -18,10 +18,4 @@ class ProductView(View):
     
 
 
-<<<<<<< HEAD
-# Create your views here.
-def home(request):
-    products = Product.objects.all()
-    return render(request, 'base.html', {'products': products})
-=======
->>>>>>> dev
+
