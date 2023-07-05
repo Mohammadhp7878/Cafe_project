@@ -1,6 +1,7 @@
 from django.views import View
 from django.shortcuts import render, redirect
 from orders.models import Order
+from products.models import Product
 from . import forms
 
 
@@ -25,6 +26,12 @@ class DashboardView(View):
         }
 
         return render(request, 'cashier.html', context)
+
+
+class ProductView(View):
+    def get(self, request):
+        items = Product.objects.all()
+        return render(request, 'inc/products.html', {'items': items})
 
 
 class CreateOrderView(View):
