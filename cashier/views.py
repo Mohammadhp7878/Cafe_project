@@ -1,3 +1,4 @@
+from typing import Any
 from django.views import View
 from django.shortcuts import render, redirect
 from orders.models import Order
@@ -61,5 +62,7 @@ class DeleteOrderView(View):
     
 
 class TotalOrder(View):
-    ...
+    def get(self, request):
+        content = Order.objects.all()
+        return render(request, "inc/totalorder.html", {'content': content})
 
