@@ -8,7 +8,10 @@ from . import forms
 
 class DashboardView(View):
     def get(self, request):
+        status = request.GET.get('status', None)
         orders = Order.objects.all()
+        if status:
+            orders = orders.filter(status=status)
         # customer = Customer.objects.all()
         total_order = orders.count()
         deliver = orders.filter(status="d").count()

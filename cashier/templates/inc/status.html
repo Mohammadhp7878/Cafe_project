@@ -5,7 +5,7 @@
   <div class="col">
     <div class="col-md">
       <div class="card text-center text-white mb-3" id="total-order">
-        <a href="{% url 'total_order' %}" class="fade-link text-decoration-none text-reset ">
+        <a href="{% url 'dashboard' %}" class="fade-link text-decoration-none text-reset ">
           <div class="card-header">
             <h5 class="card-title">Total Orders</h5>
           </div>
@@ -22,7 +22,7 @@
   <div class="col">
     <div class="col-md">
       <div class="card text-center text-white mb-3" id="orders-delivered">
-        <a href="" class="fade-link text-decoration-none text-reset ">
+        <a href="{% url 'dashboard' %}?status=d" class="fade-link text-decoration-none text-reset ">
           <div class="card-header">
             <h5 class="card-title">Orders Delivered</h5>
           </div>
@@ -38,7 +38,7 @@
   <div class="col">
     <div class="col-md">
       <div class="card text-center text-white mb-3" id="orders-pending">
-        <a href="" class="fade-link text-decoration-none text-reset ">
+        <a href="{% url 'dashboard' %}?status=p" class="fade-link text-decoration-none text-reset ">
           <div class="card-header">
             <h5 class="card-title">Orders Pending</h5>
           </div>
@@ -54,7 +54,7 @@
   <div class="col">
     <div class="col-md">
       <div class="card text-center text-white mb-3" id="orders-cooking">
-        <a href="" class="fade-link text-decoration-none text-reset ">
+        <a href="{% url 'dashboard' %}?status=c" class="fade-link text-decoration-none text-reset ">
           <div class="card-header">
             <h5 class="card-title">Orders Cooking</h5>
           </div>
@@ -70,7 +70,7 @@
   <div class="col">
     <div class="col-md">
       <div class="card text-center text-white mb-3" id="orders-sending">
-        <a href="" class="fade-link text-decoration-none text-reset ">
+        <a href="{% url 'dashboard' %}?status=s" class="fade-link text-decoration-none text-reset ">
           <div class="card-header">
             <h5 class="card-title">Orders Sending Kitchen</h5>
           </div>
