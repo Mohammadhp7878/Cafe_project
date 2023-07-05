@@ -20,7 +20,7 @@
             <tr>
                 <td>{{order.products}}</td>
                 <td>{{order.timestamp}}</td>
-                <td>{{order.status}}</td>
+                <td>{{order.get_status_display}}</td>
                 <td><a class="btn btn-sm btn-danger">Delete</a></td>
             </tr>
             {% endfor %}
