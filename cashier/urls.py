@@ -4,5 +4,5 @@ from .views import DashboardView, CreateOrderView
 
 urlpatterns = [
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
-    path('create_order/', CreateOrderView.as_view(), name='create_order')
+    path('create_order/', CreateOrderView.as_view(), name='order_create')
 ]

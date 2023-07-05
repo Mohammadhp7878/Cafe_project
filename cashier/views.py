@@ -31,7 +31,7 @@ class CreateOrderView(View):
     def get(self, request):
         form = forms.OrderForm()
         context = {"form": form}
-        return render(request, "order_create.html", context)
+        return render(request, "inc/order_create.html", context)
 
     def post(self, request):
         form = forms.OrderForm(request.POST)
@@ -39,7 +39,7 @@ class CreateOrderView(View):
             form.save()
             return redirect("/")
         context = {"form": form}
-        return render(request, "order_create.html", context)
+        return render(request, "inc/order_create.html", context)
 
 
 class DeleteOrderView(View):
