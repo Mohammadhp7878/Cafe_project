@@ -13,6 +13,9 @@ class Order(BaseModel):
     status = models.CharField(max_length=1, choices=OrderStatus.choices, default=OrderStatus.Pending)
     timestamp = models.DateTimeField()
 
+    def __str__(self) -> str:
+        return str(self.id)
+
 
 class Product_Order(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
