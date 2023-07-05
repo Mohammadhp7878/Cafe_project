@@ -11,14 +11,14 @@
         <table class="table table-sm">
 
             <tr>
-                <th>Product</th>
+                <th>Order</th>
                 <th>Date Orderd</th>
                 <th>Status</th>
-                <th>Update</th>
+                <th>Delete</th>
             </tr>
             {% for order in orders %}
             <tr>
-                <td>{{order.product}}</td>
+                <td>{{order.products}}</td>
                 <td>{{order.timestamp}}</td>
                 <td>{{order.status}}</td>
                 <td><a class="btn btn-sm btn-danger">Delete</a></td>

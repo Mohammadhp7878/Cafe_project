@@ -10,10 +10,10 @@ class DashboardView(View):
         orders = Order.objects.all()
         # customer = Customer.objects.all()
         total_order = orders.count()
-        deliver = orders.filter(status="Delivered").count()
-        pending = orders.filter(status="Pending").count()
-        cooking = orders.filter(status="Cooking").count()
-        send_to_kitchen = orders.filter(status="Sending").count()
+        deliver = orders.filter(status="d").count()
+        pending = orders.filter(status="p").count()
+        cooking = orders.filter(status="c").count()
+        send_to_kitchen = orders.filter(status="s").count()
 
         context = {
             "orders": orders,
