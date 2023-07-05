@@ -27,7 +27,6 @@ class DashboardView(View):
         return render(request, 'cashier.html', context)
 
 
-
 class CreateOrderView(View):
     def get(self, request):
         form = forms.OrderForm()

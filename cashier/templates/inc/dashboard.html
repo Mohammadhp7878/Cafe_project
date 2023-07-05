@@ -16,7 +16,14 @@
                 <th>Status</th>
                 <th>Update</th>
             </tr>
-
+            {% for order in orders %}
+            <tr>
+                <td>{{order.product}}</td>
+                <td>{{order.timestamp}}</td>
+                <td>{{order.status}}</td>
+                <td><a class="btn btn-sm btn-info">Update</a></td>
+            </tr>
+            {% endfor %}
         </table>
     </div>
 
