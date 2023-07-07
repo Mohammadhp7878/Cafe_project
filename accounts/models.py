@@ -45,7 +45,7 @@ def validate_password(value):
         raise ValidationError("Password must have at least one special character.")
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     class Role(models.TextChoices):
         CASHIER = ("ca", "cashier")
         WAITER = ("wa", "waiter")
