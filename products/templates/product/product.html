@@ -17,18 +17,18 @@
                 
                     <div class="col-md-3 py-3 py-md-0">
                         <div class="card" style="height: 400px;">
-                            <img src="{{ product.image_src }}" alt="">
+                            <img src="{{ product.image_src.MEDIA_URL }}" alt="">
                             <div class="card-body">
                                 <h3 style="margin-top: 3px">{{ product.name }}</h3>
                                 {% if product.discount %}
                                     <p style="margin-top: 15px;">{{ product.discount_to_price }}$&nbsp &nbsp {{ product.discount }}% <br>
                                         <strike >{{ product.price }}$</strike>
-                                        <span><a  class="fa-solid fa-cart-shopping"></a></span>
+                                        <span><a  class="fa-solid fa-cart-shopping" href="{% url 'set_cooki' product.id %}"></a></span>
                                     </p>
                                 {% else %}
                                     {% if product.is_available %}
                                     
-                                        <p>{{ product.price }}$ <span><a class="fa-solid fa-cart-shopping"></a></span></p>
+                                        <p>{{ product.price }}$ <span><a class="fa-solid fa-cart-shopping" href="{% url 'set_cooki' product.id %}"></a></span></p>
                                     {% else %}
                                         <p>{{ product.price }}$ <span><i>unavailable</i></span></p>
                                     {% endif %}
@@ -43,4 +43,10 @@
             {% endfor %}
         </div>
     </div>  
+    <script>
+        function addToCart(productName) {
+          var cookieValue = "product=" + encodeURIComponent(productName) + ";expires=Thu, 01 Jan 1970 00:00:00 UTC";
+          document.cookie = cookieValue;
+        }
+    </script>
 </section>
