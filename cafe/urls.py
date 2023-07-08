@@ -26,6 +26,7 @@ urlpatterns = [
     path('', include('cashier.urls')),
     path('', include('products.urls'), name='product'),
     path('', include('home.urls'), name='home'),
+    path('', include('orders.urls'), name='cart_view'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

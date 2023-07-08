@@ -24,7 +24,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.PositiveBigIntegerField()
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    image_src = models.CharField(max_length=250)
+    image_src = models.ImageField()
     discount = models.PositiveSmallIntegerField()
     serving_time = models.DurationField()
     estimated_cooking_time = models.DurationField()

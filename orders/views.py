@@ -8,12 +8,9 @@ from products.models import Product
 
 class CartView(View):
     def get(self, request):
-        order = self.get_order(request)
-        products_in_order = order.products.all()
-        total_price = self.calculate_total_price(products_in_order)
-        receipt = self.create_or_update_receipt(order, total_price)
-        context = self.get_context_data(order, products_in_order, receipt)
-        return render(request, 'cart.html', context)
+        cart_cookie = request.COOKIES.get('cart')
+        print(cart_cookie)
+        return render(request, 'cart_page.html')
 
     def post(self, request):
         order = self.get_order(request)
