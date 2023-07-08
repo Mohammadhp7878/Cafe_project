@@ -57,12 +57,13 @@ class CreateOrderView(View):
 class DeleteOrderView(View):
     def get(self, request, pk):
         order = Order.objects.get(id=pk)
-        return render(request, "delete.html", {"order": order})
+        return render(request, "inc/delete.html", {"order": order})
 
     def post(self, request, pk):
         order = Order.objects.get(id=pk)
-        order.delete()
-        return redirect("/")
+        if 'confirm' in request.POST:
+            order.delete()
+            return redirect("/")
 
 
 class TotalOrder(View):
