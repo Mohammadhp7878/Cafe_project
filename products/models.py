@@ -30,7 +30,7 @@ class Product(models.Model):
     estimated_cooking_time = models.DurationField()
     # discount_price = models.PositiveBigIntegerField()
     is_available = models.BooleanField(default=True)
-
+    
     @property
     def discount_to_price(self):
         if self.discount > 0:
@@ -44,6 +44,3 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-
-
-
