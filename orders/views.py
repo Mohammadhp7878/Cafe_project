@@ -3,6 +3,7 @@ from django.views import View
 from django.http import HttpResponse
 from django.utils.http import urlencode
 from django.conf import settings
+import json
 
 class CartView(View):
     def get_cart_items(self, request):
