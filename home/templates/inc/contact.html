@@ -12,11 +12,13 @@
        <p>Here, you can get in touch with us.
         <br>We are waiting for your comments.
        </p>
-
-       <input class="form-control" type="text" placeholder="Name" aria-label="default input example"><br>
-       <input class="form-control" type="email" placeholder="Email" aria-label="default input example"><br>
-       <input class="form-control" type="number" placeholder="Number" aria-label="default input example"><br>
-       <button id="contact-btn">Send Message</button>
+       <form method="post" action="">
+          {% csrf_token %}
+          <input class="form-control" name="name" type="text" placeholder="Name" aria-label="default input example"><br>
+          <input class="form-control" name="email" type="email" placeholder="Email" aria-label="default input example"><br>
+          <input class="form-control" name="text" type="text" placeholder="Your Message" aria-label="default input example"><br>
+          <button id="contact-btn" type="submit">Send Message</button>
+       </form>
       </div>
       <div class="col-md-5" id="col">
         <h1>Info</h1>
@@ -29,47 +31,5 @@
 
   </div>
 </section>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script>
-    document.getElementById("contact-btn").addEventListener("click", function() {
-      var name = document.getElementById("name").value;
-      var email = document.getElementById("email").value;
-      var number = document.getElementById("number").value;
-      
-      var emailData = {
-        to: "en.moradi.66@gmail.com",
-        subject: "New Contact Message",
-        body: "Name: " + name + "\nEmail: " + email + "\nNumber: " + number
-      };
-      
-      axios.post("https://api.sendgrid.com/v3/mail/send", {
-        personalizations: [
-          { to: [{ email: emailData.to }] }
-        ],
-        from: { email: emailData.to },
-        subject: emailData.subject,
-        content: [
-          { type: "text/plain", value: emailData.body }
-        ]
-      }, {
-        headers: {
-          "Authorization": "Bearer YOUR_SENDGRID_API_KEY",
-          "Content-Type": "application/json"
-        }
-      })
-      .then(function(response) {
-        console.log("Email sent successfully!");
-        
-        var successMessage = document.createElement("p");
-        successMessage.textContent = "Email sent successfully!";
-        document.body.appendChild(successMessage);
-      })
-
-      .catch(function(error) {
-        console.error("Error sending email:", error);
-      });
-    });
-  </script>
-
-
+ 
 <!-- contact -->
