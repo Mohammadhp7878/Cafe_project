@@ -12,11 +12,13 @@
        <p>Here, you can get in touch with us.
         <br>We are waiting for your comments.
        </p>
-
-       <input class="form-control" type="text" placeholder="Name" aria-label="default input example"><br>
-       <input class="form-control" type="email" placeholder="Email" aria-label="default input example"><br>
-       <input class="form-control" type="number" placeholder="Number" aria-label="default input example"><br>
-       <button id="contact-btn">Send Message</button>
+       <form method="post" action="">
+          {% csrf_token %}
+          <input class="form-control" name="name" type="text" placeholder="Name" aria-label="default input example"><br>
+          <input class="form-control" name="email" type="email" placeholder="Email" aria-label="default input example"><br>
+          <input class="form-control" name="text" type="text" placeholder="Your Message" aria-label="default input example"><br>
+          <button id="contact-btn" type="submit">Send Message</button>
+       </form>
       </div>
       <div class="col-md-5" id="col">
         <h1>Info</h1>
@@ -28,6 +30,6 @@
     </div>
 
   </div>
-
 </section>
+ 
 <!-- contact -->
