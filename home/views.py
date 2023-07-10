@@ -12,12 +12,12 @@ def home(request):
         if form.is_valid():
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
-            number = form.cleaned_data['number']
+            message = form.cleaned_data['text']
             subject = 'contact us,'
-            message = f'{name} ** {email} ** {number}', email
+            message = f'{name} ** {email} ** {message}'
             email_from = settings.EMAIL_HOST_USER
             try:
-                send_mail(subject,'message',email_from,["cafeshopproject098@gmail.com"],fail_silently=False,)
+                send_mail(subject,message,email_from,["cafeshopproject098@gmail.com"],fail_silently=False,)
             except BadHeaderError:
                 return HttpResponse("Invalid header found.")
         else:
