@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Receipt</title>
+     <link  href="{% static 'receipt/receipt.css' %}" rel="stylesheet">
+</head>
+<body>
+<div class="receipt-container">
+    <div class="receipt-header">
+        <h1>Receipt </h1>
+        <div class="header-info">
+            <span class="table-number">Table number: {{ tables.table_number }}</span>
+            <span class="time">Time: {{ orders.timestamp }}</span>
+        </div>
+    </div>
+    <table class="receipt-table">
+
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Number</th>
+            <th>Discount</th>
+            <th>Total price</th>
+        {% for product in product_order %}
+            <tr>
+            <td>{{ product.product.name}}</td>
+            <td>{{ product.price}}$</td>
+            <td>{{ product.number}}</td>
+            <td>{{ product.product.discount}}%</td>
+            <td>{{ product.product.discount_to_price}}$</td>
+            </tr>
+        </tr>
+
+         {% endfor %}
+    <tr>
+        <td colspan="4">Total Number:</td>
+        <td>{{ total_number }}</td>
+    </tr>
+        <tr>
+        <td colspan="4">Profit:</td>
+        <td>{{ total_discount }}$</td>
+    </tr>
+        <tr>
+        <td colspan="4">Final Price:</td>
+        <td>{{ receipt.final_price }}$</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

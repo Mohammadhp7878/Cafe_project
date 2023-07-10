@@ -1,10 +1,13 @@
 from django.urls import path
-from . import views
+from .views import DashboardView, CreateOrderView, ProductView, TotalOrder, DeleteOrderView, FinalRegisterView
 
 
 urlpatterns = [
-    path('dashboard/', views.DashboardView.as_view(), name='dashboard'),
-    path('create_order/', views.CreateOrderView.as_view(), name='order_create'),
-    path('product/', views.ProductView.as_view(), name='product'),
-    path('total_order', views.TotalOrder.as_view() , name='total_order')
+    path('dashboard/', DashboardView.as_view(), name='dashboard'),
+    path('create_order/', CreateOrderView.as_view(), name='order_create'),
+    path('product/', ProductView.as_view(), name='product'),
+    path('total_order', TotalOrder.as_view(), name='total_order'),
+    path('delete_order/<str:pk>', DeleteOrderView.as_view(), name='delete_order'),
+    path('final_register/<str:pk>', FinalRegisterView.as_view(), name='final_register' ),
+
 ]
