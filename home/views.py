@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from . import models
+from cafe import settings
 from .forms import ContactForm
 from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse, HttpResponseRedirect
@@ -12,8 +13,11 @@ def home(request):
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
             number = form.cleaned_data['number']
+            subject = 'contact us,'
+            message = f'{name} ** {email} ** {number}', email
+            email_from = settings.EMAIL_HOST_USER
             try:
-                send_mail('contact', f'{name}\n{email}\n{number}', email, ["en.moradi.66@gmail.com"],)
+                send_mail(subject,'message',email_from,["cafeshopproject098@gmail.com"],fail_silently=False,)
             except BadHeaderError:
                 return HttpResponse("Invalid header found.")
         else:

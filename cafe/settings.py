@@ -143,5 +143,12 @@ LOGIN_URL = '/cashierlogin/'
 LOGOUT_REDIRECT_URL = '/'
 
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_FILE_PATH = "email/"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'en.moradi.66@gmail.com'
+EMAIL_HOST_PASSWORD = 'rlvwzemhalkaymxf'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
