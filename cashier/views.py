@@ -15,7 +15,6 @@ class DashboardView(View):
         deliver = orders.filter(status="d").count()
         pending = orders.filter(status="p").count()
         cooking = orders.filter(status="c").count()
-        send_to_kitchen = orders.filter(status="s").count()
         if status:
             orders = orders.filter(status=status)
         # customer = Customer.objects.all()
@@ -27,9 +26,7 @@ class DashboardView(View):
             "deliver": deliver,
             "pending": pending,
             "cooking": cooking,
-            "send_to_kitchen": send_to_kitchen,
         }
-
         return render(request, "cashier.html", context)
 
 
@@ -39,19 +36,19 @@ class ProductView(View):
         return render(request, "inc/products.html", {"items": items})
 
 
-class CreateOrderView(View):
+class ChangeStatusView(View):
     def get(self, request):
-        form = forms.OrderForm()
+        form = forms.StatusForm()
         context = {"form": form}
-        return render(request, "inc/order_create.html", context)
+        return render(request, "inc/dashboard.html", context)
 
     def post(self, request):
-        form = forms.OrderForm(request.POST)
+        form = forms.StatusForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("/")
+            return redirect("dashboard.html")
         context = {"form": form}
-        return render(request, "inc/order_create.html", context)
+        return render(request, "inc/dashboard.html", context)
 
 
 class DeleteOrderView(View):
