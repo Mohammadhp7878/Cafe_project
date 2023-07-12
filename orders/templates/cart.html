@@ -1,4 +1,23 @@
 {% load static %}
+<script>
+    // دریافت المان‌های مربوطه
+    const quantityInput = document.getElementById('quantity-input');
+    const totalPriceElement = document.getElementById('total-price');
+  
+    // رویداد تغییر تعداد
+    quantityInput.addEventListener('change', () => {
+      updateTotal();
+    });
+  
+    // تابع به روزرسانی مبلغ کل
+    function updateTotal() {
+      const quantity = parseInt(quantityInput.value);
+      const price = parseFloat("{{ product.price }}");
+      const total = quantity * price;
+      totalPriceElement.textContent = total.toFixed(2) + "$";
+    }
+  </script>
+  
 <section class="h-100 h-custom" style="background-color: hsla(0, 0%, 92%, 0.728);">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -38,27 +57,28 @@
                               </div>
                               <div class="col-md-3 col-lg-3 col-xl-3">
                               <td>   <h6 class="text-muted">{{ product.category }}</h6></td>
-<!--                                  <h6 class="text-black mb-0">{{ product.name }}</h6>-->
-                              </div>
-<!--                              <div class="col-md-2 col-lg-2 col-xl-1">-->
-<!--&lt;!&ndash;                                  <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">&ndash;&gt;-->
-<!--&lt;!&ndash;                                      <i class="fas fa-minus"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                                  </button>&ndash;&gt;-->
-<!--                                    <td> <input id="form1" min="0" name="quantity" value="{{ product.quantity }}" type="number "class="form-control form-control-sm" ></td>-->
-<!--&lt;!&ndash;                                  <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">&ndash;&gt;-->
-<!--&lt;!&ndash;                                      <i class="fas fa-plus"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                                  </button>&ndash;&gt;-->
-<!--                              </div>-->
-                          <div class="col-md-3 col-lg-2 col-xl-1">
-                                    <td><input id="form1" min="0" name="quantity" value="{{ product.quantity }}" type="number" class="form-control form-control-sm"></td>
-                          </div>
 
+                              </div>
+                               
+                                <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                    <td>
+                                        <form method="post" action="">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-link px-2">
+                                            <i class="fas fa-minus"></i>
+                                            </button>
+                                            <input id="quantity-input" min="0" max="10" name="quantity" value="1" 
+                                            type="number" class="form-control form-control-sm" />
+                                            <button type="submit" class="btn btn-link px-2">
+                                            <i class="fas fa-plus"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </div>
+                                
                               <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                                 <td>  <h6 class="mb-0"> {{ product.price }}$</h6></td>
                               </div>
-<!--                              <div class="col-md-1 col-lg-1 col-xl-1 text-end">-->
-<!--                                  <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>-->
-<!--                              </div>-->
                           </div>
                               <div>
                                   <td>
@@ -73,7 +93,7 @@
                               <div>
                                   <td>
 
-                                    <p >{{ product.total }}$
+                                    <p id="total-price">{{ product.total }}$
 
                                     </p>
 

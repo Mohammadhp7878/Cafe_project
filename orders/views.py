@@ -23,10 +23,12 @@ class CartView(View):
                 products.append({'product': product, 'quantity': value, 'name': product.name,
                                  'price': product.price, 'category': product.category,
                                  'discount':product.discount, 'total':product.discount_to_price})
-                print(f'Product: {product}, Quantity: {value}')
             except Product.DoesNotExist:
                 pass
         return render(request, 'cart_page.html', {'products': products})
+    
+    def post(self, request):
+        print(*request)
 
 class RemoveFromCartView(View):
     def post(self, request, product_id):

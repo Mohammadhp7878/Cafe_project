@@ -25,7 +25,6 @@ class SetCooki(View):
         response = redirect(request.META.get('HTTP_REFERER'))
         expires = datetime.now() + timedelta(days=7)
         response.set_cookie('cart', cart_cookie, expires=expires)
-        print(f'This is the cart cookie: {cart_cookie}')
         return response
 
 
