@@ -9,15 +9,23 @@ class CartView(View):
     def get(self, request):
         cart_product = request.COOKIES.get('cart')
         number_of_product = {}
+        
         for i in cart_product:
             if i in number_of_product:
                 number_of_product[i] += 1
             else:
                 number_of_product[i] = int(1)
+
         number_of_product.pop(',')
+
         for key in number_of_product.keys():
             products = Product.objects.filter(id=int(key))
-        return render(request, 'cart_page.html')
+
+        context = {
+            'products': products,
+            'number_of_product':number_of_product
+        }
+        return render(request, 'cart_page.html', context)
 
 class RemoveFromCartView(View):
     def post(self, request, product_id):
