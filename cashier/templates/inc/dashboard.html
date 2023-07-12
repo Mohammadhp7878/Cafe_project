@@ -22,8 +22,12 @@
                 <td>{{order.id}}</td>
                 <td>{{order.timestamp}}</td>
                 <td>{{order.get_status_display}}</td>
+
+                <td><a class="btn btn-sm btn-warning" href="{% url 'final_register' order.id %}">Final register</a></td>
                 <td><a href="{% url 'cart_view' %}" class="btn btn-sm btn-warning">Final register</a></td>
+                <td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Delete</a></td>
                 <td><a class="btn btn-sm btn-danger">Delete</a></td>
+
             </tr>
             {% endfor %}
         </table>
