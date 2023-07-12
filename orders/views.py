@@ -22,12 +22,15 @@ class CartView(View):
         for key in number_of_product.keys():
             products.append(Product.objects.get(id=int(key)))
         
-        print(len(products))
+        total_price = 0
+        for product in products:
+            total_price+=product.price
 
         context = {
             'products': products,
             'number_of_product':number_of_product,
-            'items': len(products)
+            'items': len(products),
+            'total_price': total_price,
         }
         return render(request, 'cart_page.html', context)
 
