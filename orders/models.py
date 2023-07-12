@@ -10,7 +10,7 @@ class Order(BaseModel):
         Cooking = ('c', 'cooking')
     products = models.ManyToManyField(Product, through='Product_Order')
     status = models.CharField(max_length=1, choices=OrderStatus.choices, default=OrderStatus.Pending)
-    timestamp = models.DateTimeField()
+    timestamp = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
         return str(self.id)

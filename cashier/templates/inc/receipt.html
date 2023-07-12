@@ -23,7 +23,7 @@
             <th>Number</th>
             <th>Discount</th>
             <th>Total price</th>
-        {% for product in product_order %}
+        {% for product in products %}
             <tr>
             <td>{{ product.product.name}}</td>
             <td>{{ product.price}}$</td>
@@ -44,7 +44,7 @@
     </tr>
         <tr>
         <td colspan="4">Final Price:</td>
-        <td>{{ receipt.final_price }}$</td>
+        <td>{{ receipt.total_price }}$</td>
         </tr>
     </table>
 </div>

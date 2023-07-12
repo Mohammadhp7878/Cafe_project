@@ -3,7 +3,7 @@ from django.views import View
 from django.http import HttpResponse
 from django.utils.http import urlencode
 from django.conf import settings
-from .models import Product, Order, Product_Order
+from .models import Product, Order, Product_Order, Receipt
 from datetime import datetime, timedelta
 
 class CartView(View):
@@ -42,6 +42,8 @@ class CartView(View):
         return redirect('cart.html')
 
 class ReceiptView(View):
+    def get(self, request):
+        return render(request, 'inc/receipt.html')
     def post(self, request):
         cart_product = request.COOKIES.get('cart')
         cart_list = cart_product.split(',') if cart_product else []
@@ -57,15 +59,23 @@ class ReceiptView(View):
         for key, value in number_of_product.items():
             product = Product.objects.get(id=int(key))
             if product.discount:
-                total_price = float(f'{product.discount_to_price * value:.2f}')
+                total_price = round(product.discount_to_price * value, 2)
             else:
-                total_price = float(f'{product.price * value:.2f}')
+                total_price = round(product.price * value, 2)
             products.append({'quantity': value, 'total': product.discount_to_price,
-                                'total_price':total_price, 'id':product.id})
-            total_price_sum = sum(product['total_price'] for product in products)
-            Order.objects.create()
-            Product_Order.objects.create()
+                             'total_price': total_price, 'id': product.id})
+            total_price_sum += total_price
 
+        order = Order.objects.create(status=Order.OrderStatus.Pending)
+        order_id = order.id
+
+        for product in products:
+            Product_Order.objects.create(product_id=product['id'], order_id=order_id,
+                                         number=product['quantity'], price=total_price_sum)
+
+        Receipt.objects.create(order_id=order_id, total_price=total_price_sum, final_price=total_price_sum)
+
+        return render(request, 'inc/receipt.html', {'products': products, 'order_id': order_id})
         
         
 
