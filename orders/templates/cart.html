@@ -72,9 +72,17 @@
                               <div>
                                   <td>
 
-                                    <p >{{ product.total }}$
-
-                                    </p>
+                                    {% if product.discount %}
+                                        {% comment %} Calculate total price with discount {% endcomment %}
+                                        {% with total_price=product.quantity * product.price * (1 - product.discount/100) %}
+                                            <p>{{ total_price }}$</p>
+                                        {% endwith %}
+                                    {% else %}
+                                        {% comment %} Calculate total price without discount {% endcomment %}
+                                        {% with total_price=product.quantity * product.price %}
+                                            <p>{{ total_price }}$</p>
+                                        {% endwith %}
+                                    {% endif %}
 
                                   </td>
                               </div>
