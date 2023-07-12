@@ -24,7 +24,7 @@
                                     <thead>
                                         <tr>
                                             <th>product</th>
-                                            <th>category</th>
+                                            <th></th>
                                             <th>quantity</th>
                                             <th>price</th>
                                             <th>discount</th>
@@ -37,21 +37,14 @@
                           <tr>
                           <div class="row mb-4 d-flex justify-content-between align-items-center">
                               <div class="col-md-2 col-lg-2 col-xl-2">
-                              <td>    <img src="{{ product.image.url }}" class="img-fluid rounded-3" alt="{{ product.name }}"></td>
+                              <td> <img src="{{ product.image.url }}" alt="" width="60px">  
+                                 </td>
                               </div>
                               <div class="col-md-3 col-lg-3 col-xl-3">
-                              <td>   <h6 class="text-muted">{{ product.category }}</h6></td>
-<!--                                  <h6 class="text-black mb-0">{{ product.name }}</h6>-->
+                              <td>   <h6 class="text-muted">{{ product.name }}</h6></td>
+
                               </div>
-<!--                              <div class="col-md-2 col-lg-2 col-xl-1">-->
-<!--&lt;!&ndash;                                  <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">&ndash;&gt;-->
-<!--&lt;!&ndash;                                      <i class="fas fa-minus"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                                  </button>&ndash;&gt;-->
-<!--                                    <td> <input id="form1" min="0" name="quantity" value="{{ product.quantity }}" type="number "class="form-control form-control-sm" ></td>-->
-<!--&lt;!&ndash;                                  <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">&ndash;&gt;-->
-<!--&lt;!&ndash;                                      <i class="fas fa-plus"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                                  </button>&ndash;&gt;-->
-<!--                              </div>-->
+
                           <div class="col-md-3 col-lg-2 col-xl-1">
                                     <td><input id="form1" min="0" name="quantity" value="{{ product.quantity }}" type="number" class="form-control form-control-sm"></td>
                           </div>
@@ -59,9 +52,7 @@
                               <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                                 <td>  <h6 class="mb-0"> {{ product.price }}$</h6></td>
                               </div>
-<!--                              <div class="col-md-1 col-lg-1 col-xl-1 text-end">-->
-<!--                                  <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>-->
-<!--                              </div>-->
+
                           </div>
                               <div>
                                   <td>
@@ -104,10 +95,6 @@
 
                       <h5 class="text-uppercase">{{ products|length }} items</h5>
                       <h5>{{ total_price_sum}}$</h5>
-
-                      <h5 class="text-uppercase">items: {{ items }}</h5>
-                      <h5> $ {{ total_price }}</h5>
-
                     </div>
 
                     <h5 class="text-uppercase mb-3" >Table</h5>
@@ -138,8 +125,8 @@
                       <h5>{{total_price_sum}}$</h5>
                     </div>
 
-                    <a type="button" class="btn btn-dark btn-block btn-lg"
-                      data-mdb-ripple-color="dark" style="background-color: #C0392B" href="" >Final payment</a>
+                    <a type="button" class="btn btn-dark btn-block btn-lg" href="{% url 'receipt' %}"
+                      data-mdb-ripple-color="dark" style="background-color: #2bc030" href="" >Final payment</a>
 
 
                   </div>

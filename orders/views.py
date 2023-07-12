@@ -3,7 +3,7 @@ from django.views import View
 from django.http import HttpResponse
 from django.utils.http import urlencode
 from django.conf import settings
-from .models import Product
+from .models import Product, Order, Product_Order
 from datetime import datetime, timedelta
 
 class CartView(View):
@@ -22,11 +22,14 @@ class CartView(View):
         for key, value in number_of_product.items():
             try:
                 product = Product.objects.get(id=int(key))
-                total_price = float(f'{product.discount_to_price * value:.2f}')
+                if product.discount:
+                    total_price = float(f'{product.discount_to_price * value:.2f}')
+                else:
+                    total_price = float(f'{product.price * value:.2f}')
                 products.append({'product': product, 'quantity': value, 'name': product.name,
                                  'price': product.price, 'category': product.category,
                                  'discount': product.discount, 'total': product.discount_to_price,
-                                 'total_price':total_price, 'id':product.id})
+                                 'total_price':total_price, 'id':product.id, 'image': product.image_src})
                 total_price_sum = sum(product['total_price'] for product in products)
             except Product.DoesNotExist:
                 pass
@@ -37,6 +40,38 @@ class CartView(View):
 
         print(*request)
         return redirect('cart.html')
+
+class ReceiptView(View):
+    def post(self, request):
+        cart_product = request.COOKIES.get('cart')
+        cart_list = cart_product.split(',') if cart_product else []
+        number_of_product = {}
+
+        for key in cart_list:
+            if key in number_of_product:
+                number_of_product[key] += 1
+            else:
+                number_of_product[key] = int(1)
+        products = []
+
+        for key, value in number_of_product.items():
+            product = Product.objects.get(id=int(key))
+            if product.discount:
+                total_price = float(f'{product.discount_to_price * value:.2f}')
+            else:
+                total_price = float(f'{product.price * value:.2f}')
+            products.append({'quantity': value, 'total': product.discount_to_price,
+                                'total_price':total_price, 'id':product.id})
+            total_price_sum = sum(product['total_price'] for product in products)
+            Order.objects.create()
+            Product_Order.objects.create()
+
+        
+        
+
+
+
+
 
 class RemoveFromCartView(View):
     def post(self, request, product_id):

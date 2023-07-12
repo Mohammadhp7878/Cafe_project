@@ -21,16 +21,24 @@
                 <td>{{order.id}}</td>
                 <td>{{order.timestamp}}</td>
                 <form method="post" action="{% url 'change-status' %}">
-                <td><button type="submit" >Submit</button></td>
+                <td>
+                    <div class="mb-4 pb-2">
+                        <select class="select" style="background-color: #f0e9e9 ">
+                          <option value="1">Pending</option>
+                          <option value="2">Cooking</option>
+                          <option value="3">Delivered</option>
+                        </select>
+                      </div>
+                </td>
                     {% csrf_token %}
                     {{ form.as_p }}
 
                     </form>
 
-<!--                <td><a class="btn btn-sm btn-warning" href="{% url 'final_register' order.id %}">Final register</a></td>-->
+
                 <td><a href="{% url 'cart_view' %}" class="btn btn-sm btn-warning">Final register</a></td>
                 <td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Delete</a></td>
-<!--                <td><a class="btn btn-sm btn-danger">Delete</a></td>-->
+
 
             </tr>
             {% endfor %}

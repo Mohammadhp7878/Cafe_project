@@ -69,7 +69,7 @@ class TotalOrder(View):
         return render(request, "inc/totalorder.html", {"content": content})
 
 
-class FinalRegisterView(View):
+class ReceiptView(View):
     def get(self, request, pk):
         product_order = Product_Order.objects.filter(order_id=pk)
         tables = table.objects.get(id=pk)
@@ -88,6 +88,6 @@ class FinalRegisterView(View):
 
         receipt = Receipt.objects.create(orders=orders, total_price=total_price, final_price=final_price)
 
-        return render(request, 'inc/final_register.html',
+        return render(request, 'inc/receipt.html',
                       {'product_order': product_order, 'tables': tables, 'orders': orders,
                        'receipt': receipt, 'total_number': total_number, 'total_discount': total_discount})

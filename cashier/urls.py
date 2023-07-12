@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import DashboardView, ProductView, TotalOrder, DeleteOrderView, FinalRegisterView, ChangeStatusView
+from .views import DashboardView, ProductView, TotalOrder, DeleteOrderView, ReceiptView, ChangeStatusView
 
 # app_name = 'cashier'
 urlpatterns = [
@@ -7,7 +7,7 @@ urlpatterns = [
     path('product/', ProductView.as_view(), name='product'),
     path('total_order', TotalOrder.as_view(), name='total_order'),
     path('delete_order/<str:pk>', DeleteOrderView.as_view(), name='delete_order'),
-    path('final_register/<str:pk>', FinalRegisterView.as_view(), name='final_register'),
+    path('receipt/<str:pk>', ReceiptView.as_view(), name='receipt'),
     path('change-status/', ChangeStatusView.as_view(), name='change-status'),
 
 ]
