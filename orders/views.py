@@ -11,6 +11,7 @@ class CartView(View):
         cart_product = request.COOKIES.get('cart')
         cart_list = cart_product.split(',') if cart_product else []
         number_of_product = {}
+
         for key in cart_list:
             if key in number_of_product:
                 number_of_product[key] += 1
@@ -31,7 +32,23 @@ class CartView(View):
                 pass
         return render(request, 'cart_page.html', {'products': products, 'total_price_sum': f'{total_price_sum:.2f}'})
 
+
     def post(self, request):
 
         print(*request)
         return redirect('cart.html')
+
+class RemoveFromCartView(View):
+    def post(self, request, product_id):
+        cart_items = CartView.get_cart_items(request)
+
+        for i, item in enumerate(cart_items):
+            if item['id'] == product_id:
+                del cart_items[i]
+                break
+
+        response = HttpResponse()
+        response = CartView.set_cart_items(response, cart_items)
+
+        return response
+

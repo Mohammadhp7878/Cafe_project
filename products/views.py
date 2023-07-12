@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from .models import Product, Category
 from django.views.generic import ListView, DetailView
 from django.contrib.messages import constants as messages
+from datetime import datetime, timedelta
 
 
 class ProductView(View):
@@ -22,7 +23,8 @@ class SetCooki(View):
         cart_list.append(str(pk))
         cart_cookie = ','.join(cart_list)
         response = redirect(request.META.get('HTTP_REFERER'))
-        response.set_cookie('cart', cart_cookie)
+        expires = datetime.now() + timedelta(days=7)
+        response.set_cookie('cart', cart_cookie, expires=expires)
         print(f'This is the cart cookie: {cart_cookie}')
         return response
 
