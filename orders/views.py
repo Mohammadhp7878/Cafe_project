@@ -15,15 +15,19 @@ class CartView(View):
                 number_of_product[i] += 1
             else:
                 number_of_product[i] = int(1)
-
-        number_of_product.pop(',')
-
+        if ',' in number_of_product:
+            number_of_product.pop(',')
+        
+        products = []
         for key in number_of_product.keys():
-            products = Product.objects.filter(id=int(key))
+            products.append(Product.objects.get(id=int(key)))
+        
+        print(len(products))
 
         context = {
             'products': products,
-            'number_of_product':number_of_product
+            'number_of_product':number_of_product,
+            'items': len(products)
         }
         return render(request, 'cart_page.html', context)
 
