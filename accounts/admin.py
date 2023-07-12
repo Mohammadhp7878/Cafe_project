@@ -8,16 +8,17 @@ class CustomUserAdmin(UserAdmin):
     ordering = ('role','first_name')
     filter_horizontal = ()
     fieldsets = (
-        (None, {'fields': ('phone_number',)}),
+        ('Contact Info', {'fields': ('phone_number', 'email')}),
         ('Personal Info', {'fields': ('first_name', 'last_name')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'role')}),
+        ('password', {'fields':('password',)})
     )
     add_fieldsets = (
-        (None, {
+        ('username and password', {
             'classes': ('wide',),
             'fields': ('phone_number', 'password1', 'password2'),
         }),
     )
-    exclude = ('password',)
+
 
 admin.site.register(models.User, CustomUserAdmin)

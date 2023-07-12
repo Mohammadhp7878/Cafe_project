@@ -1,24 +1,8 @@
+
 {% load static %}
-<script>
-    // دریافت المان‌های مربوطه
-    const quantityInput = document.getElementById('quantity-input');
-    const totalPriceElement = document.getElementById('total-price');
-  
-    // رویداد تغییر تعداد
-    quantityInput.addEventListener('change', () => {
-      updateTotal();
-    });
-  
-    // تابع به روزرسانی مبلغ کل
-    function updateTotal() {
-      const quantity = parseInt(quantityInput.value);
-      const price = parseFloat("{{ product.price }}");
-      const total = quantity * price;
-      totalPriceElement.textContent = total.toFixed(2) + "$";
-    }
-  </script>
-  
+
 <section class="h-100 h-custom" style="background-color: hsla(0, 0%, 92%, 0.728);">
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 <section class="h-100 h-custom" style="background-color: white;">
@@ -26,7 +10,7 @@
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12">
-          <div class="card card-registration card-registration-2" style="border-radius: 15px; background-color: white">
+          <div class="card card-registration card-registration-2" style="border-radius: 15px; background-color: white ">
             <div class="card-body p-0">
               <div class="row g-0">
                   <div class="col-lg-8">
@@ -89,13 +73,17 @@
                                         {% endif %}
                                   </td>
                               </div>
-                              <td><a class="btn btn-sm btn-danger">Delete</a></td>
+                              <form method="post" action="">
+                                  {% csrf_token %}
+                                  <td><button class="btn btn-sm btn-danger" type="submit">Delete</button></td>
+                              </form>
                               <div>
                                   <td>
-
                                     <p id="total-price">{{ product.total }}$
 
                                     </p>
+                                        <p>{{ product.total_price }}$</p>
+
 
                                   </td>
                               </div>
@@ -118,8 +106,13 @@
                     <hr class="my-4">
 
                     <div class="d-flex justify-content-between mb-4">
+
+                      <h5 class="text-uppercase">{{ products|length }} items</h5>
+                      <h5>{{ total_price_sum}}$</h5>
+
                       <h5 class="text-uppercase">items: {{ items }}</h5>
                       <h5> $ {{ total_price }}</h5>
+
                     </div>
 
                     <h5 class="text-uppercase mb-3" >Table</h5>
@@ -147,11 +140,12 @@
 
                     <div class="d-flex justify-content-between mb-5">
                       <h5 class="text-uppercase">Total price</h5>
-                      <h5>€ 137.00</h5>
+                      <h5>{{total_price_sum}}$</h5>
                     </div>
 
-                    <button type="button" class="btn btn-dark btn-block btn-lg"
-                      data-mdb-ripple-color="dark" style="background-color: #C0392B ">Final payment</button>
+                    <a type="button" class="btn btn-dark btn-block btn-lg"
+                      data-mdb-ripple-color="dark" style="background-color: #C0392B" href="" >Final payment</a>
+
 
                   </div>
                 </div>
