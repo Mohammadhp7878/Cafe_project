@@ -1,0 +1,73 @@
+{% load static %}
+{% block content %}
+
+<div class="row">
+  <div class="col">
+    <div class="col-md">
+      <div class="card text-center text-white mb-3" id="total-order">
+        <a href="{% url 'dashboard' %}" class="fade-link text-decoration-none text-reset ">
+          <div class="card-header">
+            <h5 class="card-title">Total Orders</h5>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">{{total_order}}</h3>
+          </div>
+      </a>
+      </div>
+    </div>
+  </div>
+  
+
+
+  <div class="col">
+    <div class="col-md">
+      <div class="card text-center text-white mb-3" id="orders-delivered">
+        <a href="{% url 'dashboard' %}?status=d" class="fade-link text-decoration-none text-reset ">
+          <div class="card-header">
+            <h5 class="card-title">Orders Delivered</h5>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">{{deliver}}</h3>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="col">
+    <div class="col-md">
+      <div class="card text-center text-white mb-3" id="orders-pending">
+        <a href="{% url 'dashboard' %}?status=p" class="fade-link text-decoration-none text-reset ">
+          <div class="card-header">
+            <h5 class="card-title">Orders Pending</h5>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">{{pending}}</h3>
+          </div>
+          </a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col">
+    <div class="col-md">
+      <div class="card text-center text-white mb-3" id="orders-cooking">
+        <a href="{% url 'dashboard' %}?status=c" class="fade-link text-decoration-none text-reset ">
+          <div class="card-header">
+            <h5 class="card-title">Orders Cooking</h5>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">{{cooking}}</h3>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+{% endblock %}

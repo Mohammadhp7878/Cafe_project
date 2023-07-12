@@ -1,0 +1,51 @@
+{% load static %}
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-md-12 text-center">
+<!--        <h5>LAST 5 ORDERS</h5>-->
+
+        <table class="table table-sm">
+
+            <tr>
+                <th>Order</th>
+                <th>Date Orderd</th>
+                <th>Status</th>
+                <th>Final register</th>
+                <th>Delete</th>
+            </tr>
+            {% for order in orders %}
+            <tr>
+                <td>{{order.id}}</td>
+                <td>{{order.timestamp}}</td>
+                <form method="post" action="{% url 'change-status' %}">
+                <td>
+                    <div class="mb-4 pb-2">
+                        <select class="select" style="background-color: #f0e9e9 ">
+                          <option value="1">Pending</option>
+                          <option value="2">Cooking</option>
+                          <option value="3">Delivered</option>
+                        </select>
+                      </div>
+                </td>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    </form>
+
+
+                <td><a href="{% url 'cart_view' %}" class="btn btn-sm btn-warning">Final register</a></td>
+                <td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Delete</a></td>
+
+
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+
+
+{% endblock %}

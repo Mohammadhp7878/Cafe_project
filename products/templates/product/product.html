@@ -1,0 +1,52 @@
+{% load static %}
+
+<section class="product" id="product">
+    <div class="container">
+        <div class="heading3">Category</div>
+        <div class="heading3">
+            
+            {% for category in categories %}
+                <a href="{{ category.get_absolute_url }}" class="btn btn-dark">{{ category.category_name }}</a>
+            {% endfor %}
+            
+        </div>
+    </div>
+    <div class="container" id="container2">
+        <div class="row" style="margin-top: 30px;">
+            {% for product in products %}
+                
+                    <div class="col-md-3 py-3 py-md-0">
+                        <div class="card" style="height: 400px;">
+                            <img src="{{ product.image_src.url }}" alt="">
+                            <div class="card-body">
+                                <h3 style="margin-top: 3px">{{ product.name }}</h3>
+                                {% if product.discount %}
+                                    <p style="margin-top: 15px;">{{ product.discount_to_price }}$&nbsp &nbsp {{ product.discount }}% <br>
+                                        <strike >{{ product.price }}$</strike>
+                                        <span><a  class="fa-solid fa-cart-shopping" href="{% url 'set_cooki' product.id %}"></a></span>
+                                    </p>
+                                {% else %}
+                                    {% if product.is_available %}
+                                    
+                                        <p>{{ product.price }}$ <span><a class="fa-solid fa-cart-shopping" href="{% url 'set_cooki' product.id %}"></a></span></p>
+                                    {% else %}
+                                        <p>{{ product.price }}$ <span><i>unavailable</i></span></p>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                        </div><div class="row" style="margin-top: 30px;">
+                    {% endif %}
+                
+            {% endfor %}
+        </div>
+    </div>  
+    <script>
+        function addToCart(productName) {
+          var cookieValue = "product=" + encodeURIComponent(productName) + ";expires=Thu, 01 Jan 1970 00:00:00 UTC";
+          document.cookie = cookieValue;
+        }
+    </script>
+</section>
