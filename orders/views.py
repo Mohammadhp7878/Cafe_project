@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.utils.http import urlencode
 from django.conf import settings
 from .models import Product
+from datetime import datetime, timedelta
 
 class CartView(View):
     def get(self, request):
@@ -16,28 +17,21 @@ class CartView(View):
             else:
                 number_of_product[key] = int(1)
         products = []
+
         for key, value in number_of_product.items():
             try:
                 product = Product.objects.get(id=int(key))
+                total_price = float(f'{product.discount_to_price * value:.2f}')
                 products.append({'product': product, 'quantity': value, 'name': product.name,
                                  'price': product.price, 'category': product.category,
-                                 'discount':product.discount, 'total':product.discount_to_price})
-                print(f'Product: {product}, Quantity: {value}')
+                                 'discount': product.discount, 'total': product.discount_to_price,
+                                 'total_price':total_price, 'id':product.id})
+                total_price_sum = sum(product['total_price'] for product in products)
             except Product.DoesNotExist:
                 pass
-        return render(request, 'cart_page.html', {'products': products})
+        return render(request, 'cart_page.html', {'products': products, 'total_price_sum': f'{total_price_sum:.2f}'})
 
+    def post(self, request):
 
-class RemoveFromCartView(View):
-    def post(self, request, product_id):
-        cart_items = CartView.get_cart_items(request)
-
-        for i, item in enumerate(cart_items):
-            if item['id'] == product_id:
-                del cart_items[i]
-                break
-
-        response = HttpResponse()
-        response = CartView.set_cart_items(response, cart_items)
-
-        return response
+        print(*request)
+        return redirect('cart.html')

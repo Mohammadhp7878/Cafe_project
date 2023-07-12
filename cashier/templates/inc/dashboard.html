@@ -6,7 +6,6 @@
 <div class="row">
     <div class="col-md-12 text-center">
 <!--        <h5>LAST 5 ORDERS</h5>-->
-<!--        <a class="btn btn-secondary btn-lg btn-block" href="{% url 'order_create' %}" >Create Order</a>-->
 
         <table class="table table-sm">
 
@@ -21,12 +20,17 @@
             <tr>
                 <td>{{order.id}}</td>
                 <td>{{order.timestamp}}</td>
-                <td>{{order.get_status_display}}</td>
+                <form method="post" action="{% url 'change-status' %}">
+                <td><button type="submit" >Submit</button></td>
+                    {% csrf_token %}
+                    {{ form.as_p }}
 
-                <td><a class="btn btn-sm btn-warning" href="{% url 'final_register' order.id %}">Final register</a></td>
+                    </form>
+
+<!--                <td><a class="btn btn-sm btn-warning" href="{% url 'final_register' order.id %}">Final register</a></td>-->
                 <td><a href="{% url 'cart_view' %}" class="btn btn-sm btn-warning">Final register</a></td>
                 <td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Delete</a></td>
-                <td><a class="btn btn-sm btn-danger">Delete</a></td>
+<!--                <td><a class="btn btn-sm btn-danger">Delete</a></td>-->
 
             </tr>
             {% endfor %}
