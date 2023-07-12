@@ -20,7 +20,8 @@ class CartView(View):
             try:
                 product = Product.objects.get(id=int(key))
                 products.append({'product': product, 'quantity': value, 'name': product.name,
-                                 'price': product.price, 'category': product.category})
+                                 'price': product.price, 'category': product.category,
+                                 'discount':product.discount, 'total':product.discount_to_price})
                 print(f'Product: {product}, Quantity: {value}')
             except Product.DoesNotExist:
                 pass
