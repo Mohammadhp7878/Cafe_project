@@ -6,7 +6,13 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['category_name',]
     exclude = ['slug']
 
-admin.site.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['name', 'price', 'discount', 'is_available']
+    ordering = ['name', 'price']
+    list_filter = ['is_available']
+    search_fields = ['name', 'price']
+
+admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
 
 

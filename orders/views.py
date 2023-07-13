@@ -68,7 +68,7 @@ class ReceiptView(View):
                 total_price = round(product.price * value, 2)
             products.append({'quantity': value, 'total': product.discount_to_price,
                              'total_price': total_price, 'id': product.id})
-            total_price_sum += total_price
+            total_price_sum = sum(product['total_price'] for product in products)
 
         order = Order.objects.create(status=Order.OrderStatus.Pending)
         order_id = order.id

@@ -6,6 +6,10 @@ class Product_OrderAdmin(admin.ModelAdmin):
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['status', 'id']
+    list_filter = ['status']
+    ordering = ['-id']
+    list_display_links = ['id']
+    list_editable = ['status']
 # Register your models here.
 admin.site.register(models.Order, OrderAdmin)
 admin.site.register(models.Receipt)
