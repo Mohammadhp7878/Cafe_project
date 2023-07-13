@@ -1,3 +1,4 @@
+import logging
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
@@ -5,6 +6,8 @@ from django.utils.http import urlencode
 from django.conf import settings
 from .models import Product, Order, Product_Order, Receipt
 from datetime import datetime, timedelta
+
+logger = logging.getLogger(__name__)
 
 class CartView(View):
     def get(self, request):
@@ -32,7 +35,8 @@ class CartView(View):
                                  'total_price':total_price, 'id':product.id, 'image': product.image_src})
                 total_price_sum = sum(product['total_price'] for product in products)
             except Product.DoesNotExist:
-                pass
+                logger.error(f"Product with ID {key} does not exist")
+        logger.info(f"Cart view rendered successfully with {len(products)} products")
         return render(request, 'cart_page.html', {'products': products, 'total_price_sum': f'{total_price_sum:.2f}'})
 
 

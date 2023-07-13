@@ -152,3 +152,24 @@ EMAIL_HOST_PASSWORD = 'rlvwzemhalkaymxf'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": "logging/debug.log",
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+        },
+    },
+}
