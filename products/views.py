@@ -1,3 +1,4 @@
+import logging
 from django.views import View
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -6,6 +7,7 @@ from django.views.generic import ListView, DetailView
 from django.contrib.messages import constants as messages
 from datetime import datetime, timedelta
 
+logger = logging.getLogger(__name__)
 
 class ProductView(View):
     def get(self, request, category_slug=None):
@@ -25,6 +27,7 @@ class SetCooki(View):
         response = redirect(request.META.get('HTTP_REFERER'))
         expires = datetime.now() + timedelta(days=7)
         response.set_cookie('cart', cart_cookie, expires=expires)
+        logger.info(f"")
         return response
 
 
