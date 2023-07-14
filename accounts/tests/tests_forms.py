@@ -1,28 +1,36 @@
-from django.test import TestCase
+from django.test import TestCase, Client
+from django.contrib.auth.models import User
+from django.urls import reverse
+from accounts.views import CashierLogin
 from accounts.forms import LoginForm
 
-class TestLoginForm(TestCase):
 
-    def test_valid_login_form(self):
-        form_data = {
-        'username': 'testuser',
-        'password': 'testpassword',
-        }
-        form = LoginForm(data=form_data)
-        self.assertTrue(form.is_valid())
+class CashierLoginTest(TestCase):
 
-    def test_missing_username(self):
-        form_data = {
-        'password': 'testpassword',
-        }
-        form = LoginForm(data=form_data)
-        self.assertFalse(form.is_valid())
-        self.assertIn('username', form.errors)
+    def setUp(self):
+        self.client = Client()
+        self.login_url = reverse('accounts:cashierlogin')
+        self.user = User.objects.create_user(
+        username='testuser',
+        password='testpassword'
+        )
 
-    def test_missing_password(self):
-        form_data = {
-        'username': 'testuser',
-        }
-        form = LoginForm(data=form_data)
-        self.assertFalse(form.is_valid())
-        self.assertIn('password', form.errors)
+
+    def test_get_login_form(self):
+        response = self.client.get(self.login_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'login.html')
+        self.assertIsInstance(response.context['form'], LoginForm)
+
+
+    def test_valid_login(self):
+        response = self.client.post(self.login_url, {'username': 'testuser', 'password': 'testpassword'})
+        self.assertRedirects(response, reverse('dashboard'))
+    
+    def test_invalid_login(self):
+        response = self.client.post(self.login_url, {'username': 'testuser', 'password': 'wrongpassword'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'login.html')
+        self.assertIsInstance(response.context['form'], LoginForm)
+        self.assertContains(response, 'invalid username or password')
+
