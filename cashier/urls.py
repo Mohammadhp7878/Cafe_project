@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import DashboardView, ProductView, TotalOrder, DeleteOrderView, ReceiptView, ChangeStatusView
 
-# app_name = 'cashier'
+app_name = 'cashier'
 urlpatterns = [
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
     path('product/', ProductView.as_view(), name='product'),

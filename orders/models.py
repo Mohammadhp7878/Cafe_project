@@ -8,7 +8,6 @@ class Order(BaseModel):
         Delivered = ('d', 'delivered')
         Pending = ('p', 'Pending')
         Cooking = ('c', 'cooking')
-    products = models.ManyToManyField(Product, through='Product_Order')
     status = models.CharField(max_length=1, choices=OrderStatus.choices, default=OrderStatus.Pending)
     timestamp = models.DateTimeField(auto_now=True)
 
@@ -18,7 +17,7 @@ class Order(BaseModel):
 
 class Product_Order(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='product_orders')
     number = models.IntegerField()
     price = models.PositiveBigIntegerField()
 
