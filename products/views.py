@@ -21,13 +21,14 @@ class ProductView(View):
 class SetCooki(View):
     def get(self, request, pk):
         cart_cookie = request.COOKIES.get('cart')
+        session_id=request.COOKIES.get('sessionid')
         cart_list = cart_cookie.split(',') if cart_cookie else []
         cart_list.append(str(pk))
         cart_cookie = ','.join(cart_list)
         response = redirect(request.META.get('HTTP_REFERER'))
         expires = datetime.now() + timedelta(days=7)
         response.set_cookie('cart', cart_cookie, expires=expires)
-        logger.info(f"")
+        logger.info(f"product id {pk} add to cart by session id {session_id}")
         return response
 
 

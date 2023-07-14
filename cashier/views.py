@@ -5,6 +5,9 @@ from orders.models import Order, Product_Order, table, Receipt
 from products.models import Product
 from . import forms
 from django.utils.decorators import method_decorator
+import logging
+
+logger = logging.getLogger(__name__)
 
 @method_decorator(login_required, name='dispatch')
 class DashboardView(View):
@@ -60,6 +63,7 @@ class DeleteOrderView(View):
         order = Order.objects.get(id=pk)
         if 'confirm' in request.POST:
             order.delete()
+            logger.info(f'order {pk} deleted successfully')
             return redirect("dashboard")
 
 
@@ -87,6 +91,8 @@ class ReceiptView(View):
         final_price = total_price - total_discount
 
         receipt = Receipt.objects.create(orders=orders, total_price=total_price, final_price=final_price)
+
+        logger.info(f'receipt {orders} was issued')
 
         return render(request, 'inc/receipt.html',
                       {'product_order': product_order, 'tables': tables, 'orders': orders,
