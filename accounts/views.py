@@ -3,7 +3,9 @@ from django.shortcuts import render, redirect
 from .forms import LoginForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+import logging
 
+logger = logging.getLogger(__name__)
 
 class CashierLogin(View):
     loginform = LoginForm
@@ -21,8 +23,10 @@ class CashierLogin(View):
             get_user = authenticate(request, phone_number=username, password=password)
             if get_user:
                 login(request, get_user)
+                logger.info(f'user {username} login successfully')
                 return redirect('dashboard')
-            else: 
+            else:
+                logger.warning(f'user {username}: invalid username or password')
                 return messages.error(request, 'invalid username or password')
         return render(request, self.template, {'form': form})
 
