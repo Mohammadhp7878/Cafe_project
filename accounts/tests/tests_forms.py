@@ -24,11 +24,11 @@ class CashierLoginTest(TestCase):
 
 
     def test_valid_login(self):
-        response = self.client.post(self.login_url, {'username': 'testuser', 'password': 'testpassword'})
+        response = self.client.post(self.login_url, {'username': '09199876543', 'password': 'Abb@s123'})
         self.assertRedirects(response, reverse('dashboard'))
     
     def test_invalid_login(self):
-        response = self.client.post(self.login_url, {'username': 'testuser', 'password': 'wrongpassword'})
+        response = self.client.post(self.login_url, {'username': '09199876543', 'password': 'Abb@s123'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'login.html')
         self.assertIsInstance(response.context['form'], LoginForm)
