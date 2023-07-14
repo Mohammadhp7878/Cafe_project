@@ -1,0 +1,42 @@
+.receipt-container {
+            border: 2px solid black;
+            padding: 20px;
+            width: 500px;
+            margin: 0 auto;
+        }
+
+.receipt-header {
+
+    background-color: black;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+.header-info {
+        display: flex;
+    }
+
+.table-number {
+    margin-right: 25px;
+}
+
+.time {
+        margin-left: 130px;
+    }
+
+.receipt-table {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.receipt-table th,
+.receipt-table td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.receipt-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
