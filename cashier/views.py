@@ -9,6 +9,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 @method_decorator(login_required, name='dispatch')
 class DashboardView(View):
     def get(self, request):
